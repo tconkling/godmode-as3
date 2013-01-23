@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="godmode.core.Blackboard"/>
+    <classEntry path="godmode.core.Task"/>
+    <classEntry path="godmode.core.TaskContainer"/>
+    <classEntry path="godmode.core.StatefulTask"/>
+    <classEntry path="godmode.core.FunctionTask"/>
+    <classEntry path="godmode.core.Semaphore"/>
+    <classEntry path="godmode.action.NoOpAction"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>
