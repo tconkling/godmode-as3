@@ -1,17 +1,12 @@
 //
 // godmode
 
-package godmode.util {
+package godmode.core {
 
-import godmode.core.BehaviorTask;
-import godmode.core.BehaviorTaskContainer;
-
-/**
- * Generates a string description of a behavior tree.
- */
-public class BehaviorTreePrinter
+/** Generates a string description of a behavior tree. */
+public class TreePrinter
 {
-    public function BehaviorTreePrinter (root :BehaviorTask) {
+    public function TreePrinter (root :BehaviorTask) {
         _root = root;
     }
     

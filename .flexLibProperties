@@ -25,7 +25,7 @@
     <classEntry path="godmode.selector.SequenceSelector"/>
     <classEntry path="godmode.selector.WeightedSelector"/>
     <classEntry path="godmode.selector.WeightedTask"/>
-    <classEntry path="godmode.util.BehaviorTreePrinter"/>
+    <classEntry path="godmode.core.TreePrinter"/>
     <classEntry path="godmode.TaskFactory"/>
     <classEntry path="godmode.decorator.PredicateFilter"/>
   </includeClasses>
