@@ -28,6 +28,8 @@
     <classEntry path="godmode.core.TreePrinter"/>
     <classEntry path="godmode.TaskFactory"/>
     <classEntry path="godmode.decorator.PredicateFilter"/>
+    <classEntry path="godmode.pred.ValueExistsPred"/>
+    <classEntry path="godmode.task.RemoveValueAction"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

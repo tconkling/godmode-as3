@@ -3,13 +3,11 @@
 
 package godmode {
 
-import godmode.task.NoOpAction;
-import godmode.task.TimerAction;
-import godmode.task.FunctionTask;
+import godmode.core.BehaviorTask;
 import godmode.core.RandomStream;
 import godmode.core.Semaphore;
-import godmode.core.BehaviorTask;
 import godmode.core.TimeKeeper;
+import godmode.data.MutableValue;
 import godmode.data.Value;
 import godmode.decorator.DelayFilter;
 import godmode.decorator.LoopingDecorator;
@@ -19,11 +17,16 @@ import godmode.pred.AndPredicate;
 import godmode.pred.NotPredicate;
 import godmode.pred.OrPredicate;
 import godmode.pred.Predicate;
+import godmode.pred.ValueExistsPred;
 import godmode.selector.ParallelSelector;
 import godmode.selector.PrioritySelector;
 import godmode.selector.SequenceSelector;
 import godmode.selector.WeightedSelector;
 import godmode.selector.WeightedTask;
+import godmode.task.FunctionTask;
+import godmode.task.NoOpAction;
+import godmode.task.RemoveValueAction;
+import godmode.task.TimerAction;
 
 public class TaskFactory
 {
@@ -38,7 +41,7 @@ public class TaskFactory
     }
     
     /** Runs the given task if its predicates succeed */
-    public function iff (pred :Predicate, task :BehaviorTask) :BehaviorTask {
+    public function ifThen (pred :Predicate, task :BehaviorTask) :BehaviorTask {
         return new PredicateFilter(takeName(), pred, task);
     }
     
@@ -52,9 +55,24 @@ public class TaskFactory
         return new ParallelSelector(takeName(), ParallelSelector.ALL_SUCCESS, taskVector(children));
     }
     
-    /** Loops a task until a condition is met */
-    public function loop () :LoopingDecoratorBuilder {
-        return new LoopingDecoratorBuilder(takeName());
+    /** Runs a task a specified number of times */
+    public function forCount (count :int, task :BehaviorTask) :BehaviorTask {
+        return new LoopingDecorator(takeName(), LoopingDecorator.BREAK_NEVER, count, task);
+    }
+    
+    /** Loops a task forever */
+    public function forever (task :BehaviorTask) :BehaviorTask {
+        return new LoopingDecorator(takeName(), LoopingDecorator.BREAK_NEVER, 0, task);
+    }
+    
+    /** Runs a task until it succeeds */
+    public function untilSuccess (task :BehaviorTask) :BehaviorTask {
+        return new LoopingDecorator(takeName(), LoopingDecorator.BREAK_ON_SUCCESS, 0, task);
+    }
+    
+    /** Loops a task until it fails */
+    public function untilFail (task :BehaviorTask) :BehaviorTask {
+        return new LoopingDecorator(takeName(), LoopingDecorator.BREAK_ON_FAIL, 0, task);
     }
     
     /** Runs a task, and ensure that it won't be re-run until a minimum amount of time has elapsed */
@@ -96,6 +114,11 @@ public class TaskFactory
         return new SemaphoreGuardDecorator(takeName(), semaphore, task);
     }
     
+    /** Removes the given value from its blackboard */
+    public function removeValue (value :MutableValue) :BehaviorTask {
+        return new RemoveValueAction(takeName(), value);
+    }
+    
     /** Does nothing */
     public function noOp () :BehaviorTask {
         return new NoOpAction(takeName());
@@ -116,6 +139,11 @@ public class TaskFactory
         return new OrPredicate(takeName(), predVector(preds));
     }
     
+    /** Tests the existence of the given value in its blackboard */
+    public function valueExists (value :Value) :Predicate {
+        return new ValueExistsPred(takeName(), value);
+    }
+    
     protected function takeName () :String {
         var name :String = _name;
         _name = null;
@@ -126,7 +154,7 @@ public class TaskFactory
         var n :int = arr.length;
         var out :Vector.<BehaviorTask> = new Vector.<BehaviorTask>(n, true);
         for (var ii :int = 0; ii < n; ++ii) {
-            out.push(arr[ii]);
+            out[ii] = arr[ii];
         }
         return out;
     }
@@ -135,7 +163,7 @@ public class TaskFactory
         var n :int = arr.length;
         var out :Vector.<Predicate> = new Vector.<Predicate>(n, true);
         for (var ii :int = 0; ii < n; ++ii) {
-            out.push(arr[ii]);
+            out[ii] = arr[ii];
         }
         return out;
     }
@@ -144,39 +172,4 @@ public class TaskFactory
     protected var _timeKeeper :TimeKeeper;
 }
 
-}
-import godmode.core.BehaviorTask;
-import godmode.decorator.LoopingDecorator;
-import godmode.decorator.PredicateFilter;
-import godmode.pred.Predicate;
-
-class LoopingDecoratorBuilder {
-    public function LoopingDecoratorBuilder (name :String) {
-        _name = name;
-        _type = LoopingDecorator.BREAK_NEVER;
-    }
-    
-    /** Loops the task forever */
-    public function forever (task :BehaviorTask) :BehaviorTask {
-        return new LoopingDecorator(_name, LoopingDecorator.BREAK_NEVER, 0, task);
-    }
-    
-    /** Loops the task until it succeeds */
-    public function untilSuccess (task :BehaviorTask) :BehaviorTask {
-        return new LoopingDecorator(_name, LoopingDecorator.BREAK_ON_SUCCESS, 0, task);
-    }
-    
-    /** Loops the task until it fails */
-    public function untilFail (task :BehaviorTask) :BehaviorTask {
-        return new LoopingDecorator(_name, LoopingDecorator.BREAK_ON_FAIL, 0, task);
-    }
-     
-    /** Loops the task the given number of times */
-    public function withCount (loopCount :int, task :BehaviorTask) :BehaviorTask {
-        return new LoopingDecorator(_name, LoopingDecorator.BREAK_NEVER, loopCount, task);
-    }
-    
-    protected var _name :String;
-    protected var _type :int;
-    protected var _loopCount :int;
 }
