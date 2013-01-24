@@ -4,6 +4,8 @@
 package godmode.core {
 import flash.utils.getQualifiedClassName;
 
+import godmode.util.TreePrinter;
+
 public class Task
 {
     public static const RUNNING :int = 1;
@@ -31,6 +33,14 @@ public class Task
         deactivateInternal();
     }
     
+    public final function get status () :int {
+        return _lastStatus;
+    }
+    
+    public final function getTreeStateString () :String {
+        return new TreePrinter(this).toString();
+    }
+    
     /** Returns a description of the task */
     public function get description () :String {
         var out :String = className(this);
@@ -43,15 +53,6 @@ public class Task
     /** Subclasses override */
     protected function update (dt :Number) :int {
         return SUCCESS;
-    }
-    
-    protected static function statusName (status :int) :String {
-        switch (status) {
-        case RUNNING: return "RUNNING";
-        case SUCCESS: return "SUCCESS";
-        case FAIL: return "FAIL";
-        }
-        throw new Error("Unrecognized status: " + status);
     }
     
     protected static function className (obj :Object) :String {

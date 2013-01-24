@@ -23,6 +23,9 @@
     <classEntry path="godmode.selector.ParallelSelector"/>
     <classEntry path="godmode.selector.PrioritySelector"/>
     <classEntry path="godmode.selector.SequenceSelector"/>
+    <classEntry path="godmode.selector.WeightedSelector"/>
+    <classEntry path="godmode.selector.WeightedTask"/>
+    <classEntry path="godmode.util.TreePrinter"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
