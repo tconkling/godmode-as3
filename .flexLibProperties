@@ -21,6 +21,7 @@
     <classEntry path="godmode.pred.OrPredicate"/>
     <classEntry path="godmode.pred.FunctionPredicate"/>
     <classEntry path="godmode.selector.ParallelSelector"/>
+    <classEntry path="godmode.selector.PrioritySelector"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
