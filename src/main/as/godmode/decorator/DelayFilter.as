@@ -37,7 +37,7 @@ public class DelayFilter extends StatefulBehaviorTask
     
     override protected function updateTask (dt :Number) :int {
         if (!_inited) {
-            _curDelay = _minDelay.getValue();
+            _curDelay = _minDelay.value;
             _inited = true;
         }
         

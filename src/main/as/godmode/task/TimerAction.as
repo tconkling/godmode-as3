@@ -20,7 +20,7 @@ public class TimerAction extends StatefulBehaviorTask
     
     override protected function updateTask (dt :Number) :int {
         if (_thisTime < 0) {
-            _thisTime = Math.max(_time.getValue(), 0);
+            _thisTime = Math.max(_time.value, 0);
             _elapsedTime = 0;
         }
         _elapsedTime += dt;

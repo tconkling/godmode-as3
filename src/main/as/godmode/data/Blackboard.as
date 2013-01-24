@@ -21,19 +21,29 @@ public class Blackboard
         return new BlackboardAccessor(this, key, type, defaultVal);
     }
     
-    public function containsKey (key :String) :Boolean {
+    /** @return true if a value with the given key is in the blackboard */
+    public function contains (key :String) :Boolean {
         return (key in _dict);
     }
     
-    public function removeKey (key :String) :void {
+    /** Removes the value with the given key from the blackboard (if the key exists) */
+    public function remove (key :String) :void {
         delete _dict[key];
     }
     
-    public function setValue (key :String, val :*) :void {
+    /** Stores a value in the blackboard, with the given key. The value must not be null. */
+    public function store (key :String, val :*) :void {
+        if (val == null) {
+            throw new Error("cannot store null in a blackboard");
+        }
         _dict[key] = val;
     }
     
-    public function getValue (key :String, type :Class, defaultVal :* = undefined) :* {
+    /**
+     * @return the value stored in the blackboard for the given key
+     * (or null/undefined if the key does not exist).
+     */
+    public function retrieve (key :String, type :Class, defaultVal :* = undefined) :* {
         var val :* = _dict[key];
         return (val is type ? val : defaultVal);
     }
@@ -55,16 +65,20 @@ class BlackboardAccessor
         _defaultVal = defaultVal;
     }
     
-    public function getValue () :* {
-        return _bb.getValue(_key, _type, _defaultVal);
+    public function get exists () :Boolean {
+        return _bb.contains(_key);
     }
     
-    public function setValue (val :*) :void {
-        _bb.setValue(_key, val);
+    public function get value () :* {
+        return _bb.retrieve(_key, _type, _defaultVal);
     }
     
-    public function removeValue () :void {
-        _bb.removeKey(_key);
+    public function store (val :*) :void {
+        _bb.store(_key, val);
+    }
+    
+    public function remove () :void {
+        _bb.remove(_key);
     }
     
     protected var _bb :Blackboard;
