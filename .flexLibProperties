@@ -15,6 +15,11 @@
     <classEntry path="godmode.core.MutableValue"/>
     <classEntry path="godmode.decorator.LoopingDecorator"/>
     <classEntry path="godmode.decorator.SemaphoreGuardDecorator"/>
+    <classEntry path="godmode.pred.Predicate"/>
+    <classEntry path="godmode.pred.NotPredicate"/>
+    <classEntry path="godmode.pred.AndPredicate"/>
+    <classEntry path="godmode.pred.OrPredicate"/>
+    <classEntry path="godmode.pred.FunctionPredicate"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
