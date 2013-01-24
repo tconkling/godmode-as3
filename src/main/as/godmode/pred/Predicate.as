@@ -3,10 +3,10 @@
 
 package godmode.pred {
 
-import godmode.core.Task;
+import godmode.core.BehaviorTask;
 
 /** A Task that only returns SUCCESS or FAIL */
-public class Predicate extends Task
+public class Predicate extends BehaviorTask
 {
     public function Predicate (name :String = null) {
         super(name);

@@ -3,11 +3,11 @@
 
 package godmode.action {
 
-import godmode.core.StatefulTask;
+import godmode.core.StatefulBehaviorTask;
 import godmode.core.Value;
 
 /** A Task that completes after a specified amount of time */
-public class TimerAction extends StatefulTask
+public class TimerAction extends StatefulBehaviorTask
 {
     public function TimerAction (name :String, time :Value) {
         _time = time;

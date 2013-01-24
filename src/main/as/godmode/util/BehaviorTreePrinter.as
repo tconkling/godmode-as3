@@ -3,15 +3,15 @@
 
 package godmode.util {
 
-import godmode.core.Task;
-import godmode.core.TaskContainer;
+import godmode.core.BehaviorTask;
+import godmode.core.BehaviorTaskContainer;
 
 /**
- * Generates a string description of a behavior task tree.
+ * Generates a string description of a behavior tree.
  */
-public class TreePrinter
+public class BehaviorTreePrinter
 {
-    public function TreePrinter (root :Task) {
+    public function BehaviorTreePrinter (root :BehaviorTask) {
         _root = root;
     }
     
@@ -19,7 +19,7 @@ public class TreePrinter
         return visit(_root, 0);
     }
     
-    protected function visit (task :Task, depth :int) :String {
+    protected function visit (task :BehaviorTask, depth :int) :String {
         var out :String = "";
         if (depth > 0) {
             out += "\n";
@@ -30,9 +30,9 @@ public class TreePrinter
         
         out += "[" + task.description + "]:" + statusName(task.status);
         
-        if (task is TaskContainer) {
-            var tc :TaskContainer = TaskContainer(task);
-            for each (var child :Task in tc.children) {
+        if (task is BehaviorTaskContainer) {
+            var tc :BehaviorTaskContainer = BehaviorTaskContainer(task);
+            for each (var child :BehaviorTask in tc.children) {
                 out += visit(child, depth + 1);
             }
         }
@@ -42,13 +42,13 @@ public class TreePrinter
     
     protected static function statusName (status :int) :String {
         switch (status) {
-        case Task.RUNNING: return "RUNNING";
-        case Task.SUCCESS: return "SUCCESS";
-        case Task.FAIL: return "FAIL";
+        case BehaviorTask.RUNNING: return "RUNNING";
+        case BehaviorTask.SUCCESS: return "SUCCESS";
+        case BehaviorTask.FAIL: return "FAIL";
         default: return "NEVER_RUN";
         }
     }
     
-    protected var _root :Task;
+    protected var _root :BehaviorTask;
 }
 }

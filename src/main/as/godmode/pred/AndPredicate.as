@@ -3,19 +3,19 @@
 
 package godmode.pred {
 
-import godmode.core.Task;
-import godmode.core.TaskContainer;
+import godmode.core.BehaviorTask;
+import godmode.core.BehaviorTaskContainer;
 
 public class AndPredicate extends Predicate
-    implements TaskContainer
+    implements BehaviorTaskContainer
 {
     public function AndPredicate (name :String, preds :Vector.<Predicate>) {
         super(name);
         _preds = preds;
     }
     
-    public function get children () :Vector.<Task> {
-        return Vector.<Task>(_preds);
+    public function get children () :Vector.<BehaviorTask> {
+        return Vector.<BehaviorTask>(_preds);
     }
     
     override public function evaluate () :Boolean {

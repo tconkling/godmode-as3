@@ -3,23 +3,23 @@
 
 package godmode.selector {
 
-import godmode.core.StatefulTask;
-import godmode.core.Task;
-import godmode.core.TaskContainer;
+import godmode.core.StatefulBehaviorTask;
+import godmode.core.BehaviorTask;
+import godmode.core.BehaviorTaskContainer;
 
 /**
  * Executes child tasks in sequence. Succeeds when all children have succeeded. Fails when
  * any child fails.
  */
-public class SequenceSelector extends StatefulTask
-    implements TaskContainer
+public class SequenceSelector extends StatefulBehaviorTask
+    implements BehaviorTaskContainer
 {
-    public function SequenceSelector (name :String, children :Vector.<Task>) {
+    public function SequenceSelector (name :String, children :Vector.<BehaviorTask>) {
         super(name);
         _children = children;
     }
     
-    public function get children () :Vector.<Task> {
+    public function get children () :Vector.<BehaviorTask> {
         return _children;
     }
     
@@ -49,8 +49,8 @@ public class SequenceSelector extends StatefulTask
         return SUCCESS;
     }
     
-    protected var _children :Vector.<Task>;
-    protected var _curChild :Task;
+    protected var _children :Vector.<BehaviorTask>;
+    protected var _curChild :BehaviorTask;
     protected var _childIdx :int;
 }
 }

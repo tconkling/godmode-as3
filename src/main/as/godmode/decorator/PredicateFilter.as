@@ -3,23 +3,23 @@
 
 package godmode.decorator {
 
-import godmode.core.StatefulTask;
-import godmode.core.Task;
-import godmode.core.TaskContainer;
+import godmode.core.StatefulBehaviorTask;
+import godmode.core.BehaviorTask;
+import godmode.core.BehaviorTaskContainer;
 import godmode.pred.Predicate;
 
 /** A filter that runs its task if the given predicate succeeds */
-public class PredicateFilter extends StatefulTask
-    implements TaskContainer
+public class PredicateFilter extends StatefulBehaviorTask
+    implements BehaviorTaskContainer
 {
-    public function PredicateFilter (name :String, pred :Predicate, task :Task) {
+    public function PredicateFilter (name :String, pred :Predicate, task :BehaviorTask) {
         super(name);
         _pred = pred;
         _task = task;
     }
     
-    public function get children () :Vector.<Task> {
-        return new <Task>[ _pred, _task ];
+    public function get children () :Vector.<BehaviorTask> {
+        return new <BehaviorTask>[ _pred, _task ];
     }
     
     override protected function reset () :void {
@@ -35,6 +35,6 @@ public class PredicateFilter extends StatefulTask
     }
     
     protected var _pred :Predicate;
-    protected var _task :Task;
+    protected var _task :BehaviorTask;
 }
 }

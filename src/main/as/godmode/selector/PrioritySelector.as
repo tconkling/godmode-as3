@@ -3,9 +3,9 @@
 
 package godmode.selector {
 
-import godmode.core.StatefulTask;
-import godmode.core.Task;
-import godmode.core.TaskContainer;
+import godmode.core.StatefulBehaviorTask;
+import godmode.core.BehaviorTask;
+import godmode.core.BehaviorTaskContainer;
 
 /**
  * A selector that tries to run each of its children, every update, until it finds one that
@@ -14,15 +14,15 @@ import godmode.core.TaskContainer;
  * Since children are always run in priority-order, a higher-priority task can interrupt a
  * lower-priority one that began running on a previous update.
  */
-public class PrioritySelector extends StatefulTask
-    implements TaskContainer
+public class PrioritySelector extends StatefulBehaviorTask
+    implements BehaviorTaskContainer
 {
-    public function PrioritySelector (name :String, children :Vector.<Task>) {
+    public function PrioritySelector (name :String, children :Vector.<BehaviorTask>) {
         super(name);
         _children = children;
     }
     
-    public function get children () :Vector.<Task> {
+    public function get children () :Vector.<BehaviorTask> {
         return _children;
     }
     
@@ -36,7 +36,7 @@ public class PrioritySelector extends StatefulTask
     override protected function update (dt :Number) :int {
         // iterate all children till we find one that doesn't fail
         var status :int = SUCCESS;
-        for each (var task :Task in _children) {
+        for each (var task :BehaviorTask in _children) {
             status = task.updateTask(dt);
             
             // if the child succeeded, or is still running, we exit the loop
@@ -56,7 +56,7 @@ public class PrioritySelector extends StatefulTask
         return status;
     }
     
-    protected var _children :Vector.<Task>;
-    protected var _runningTask :Task;
+    protected var _children :Vector.<BehaviorTask>;
+    protected var _runningTask :BehaviorTask;
 }
 }

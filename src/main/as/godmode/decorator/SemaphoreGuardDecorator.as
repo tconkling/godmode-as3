@@ -4,21 +4,21 @@
 package godmode.decorator {
 
 import godmode.core.Semaphore;
-import godmode.core.StatefulTask;
-import godmode.core.Task;
-import godmode.core.TaskContainer;
+import godmode.core.StatefulBehaviorTask;
+import godmode.core.BehaviorTask;
+import godmode.core.BehaviorTaskContainer;
 
-public class SemaphoreGuardDecorator extends StatefulTask
-    implements TaskContainer
+public class SemaphoreGuardDecorator extends StatefulBehaviorTask
+    implements BehaviorTaskContainer
 {
-    public function SemaphoreGuardDecorator (name :String, semaphore :Semaphore, task :Task) {
+    public function SemaphoreGuardDecorator (name :String, semaphore :Semaphore, task :BehaviorTask) {
         super(name);
         _task = task;
         _semaphore = semaphore;
     }
     
-    public function get children () :Vector.<Task> {
-        return new <Task>[ _task ];
+    public function get children () :Vector.<BehaviorTask> {
+        return new <BehaviorTask>[ _task ];
     }
     
     override public function get description () :String {
@@ -43,7 +43,7 @@ public class SemaphoreGuardDecorator extends StatefulTask
         return _task.updateTask(dt);
     }
     
-    protected var _task :Task;
+    protected var _task :BehaviorTask;
     protected var _semaphore :Semaphore;
     
     protected var _semaphoreAcquired :Boolean;

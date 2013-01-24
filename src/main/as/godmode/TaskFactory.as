@@ -8,7 +8,7 @@ import godmode.action.TimerAction;
 import godmode.core.FunctionTask;
 import godmode.core.RandomStream;
 import godmode.core.Semaphore;
-import godmode.core.Task;
+import godmode.core.BehaviorTask;
 import godmode.core.TimeKeeper;
 import godmode.core.Value;
 import godmode.decorator.DelayFilter;
@@ -38,17 +38,17 @@ public class TaskFactory
     }
     
     /** Runs the given task if its predicates succeed */
-    public function iff (pred :Predicate, task :Task) :Task {
+    public function iff (pred :Predicate, task :BehaviorTask) :BehaviorTask {
         return new PredicateFilter(takeName(), pred, task);
     }
     
     /** Runs children in sequence until one fails, or all succeed */
-    public function sequence (...children) :Task {
+    public function sequence (...children) :BehaviorTask {
         return new SequenceSelector(takeName(), taskVector(children));
     }
     
     /** Runs all children concurrently until one fails */
-    public function parallel (...children) :Task {
+    public function parallel (...children) :BehaviorTask {
         return new ParallelSelector(takeName(), ParallelSelector.ALL_SUCCESS, taskVector(children));
     }
     
@@ -58,7 +58,7 @@ public class TaskFactory
     }
     
     /** Runs a task, and ensure that it won't be re-run until a minimum amount of time has elapsed */
-    public function withRepeatDelay (minDelay :Value, task :Task) :Task {
+    public function withRepeatDelay (minDelay :Value, task :BehaviorTask) :BehaviorTask {
         return new DelayFilter(takeName(), minDelay, _timeKeeper, task);
     }
     
@@ -67,12 +67,12 @@ public class TaskFactory
      * Higher-priority tasks (those higher in the list) can interrupt lower-priority tasks that
      * are running.
      */
-    public function selectWithPriority (...children) :Task {
+    public function selectWithPriority (...children) :BehaviorTask {
         return new PrioritySelector(takeName(), taskVector(children));
     }
     
     /** Randomly selects a task to run */
-    public function selectRandomly (rng :RandomStream, ...childrenAndWeights) :Task {
+    public function selectRandomly (rng :RandomStream, ...childrenAndWeights) :BehaviorTask {
         var n :uint = childrenAndWeights.length;
         var children :Vector.<WeightedTask> = new Vector.<WeightedTask>(n >> 1, true);
         for (var ii :int = 0; ii < n; ii += 2) {
@@ -82,22 +82,22 @@ public class TaskFactory
     }
     
     /** Wait a specified amount of time */
-    public function wait (time :Value) :Task {
+    public function wait (time :Value) :BehaviorTask {
         return new TimerAction(takeName(), time);
     }
     
     /** Calls a function */
-    public function call (f :Function) :Task {
+    public function call (f :Function) :BehaviorTask {
         return new FunctionTask(takeName(), f);
     }
     
     /** Runs a task if the given semaphore is successfully acquired */
-    public function withGuard (semaphore :Semaphore, task :Task) :Task {
+    public function withGuard (semaphore :Semaphore, task :BehaviorTask) :BehaviorTask {
         return new SemaphoreGuardDecorator(takeName(), semaphore, task);
     }
     
     /** Does nothing */
-    public function noOp () :Task {
+    public function noOp () :BehaviorTask {
         return new NoOpAction(takeName());
     }
     
@@ -122,9 +122,9 @@ public class TaskFactory
         return name;
     }
     
-    protected function taskVector (arr :Array) :Vector.<Task> {
+    protected function taskVector (arr :Array) :Vector.<BehaviorTask> {
         var n :int = arr.length;
-        var out :Vector.<Task> = new Vector.<Task>(n, true);
+        var out :Vector.<BehaviorTask> = new Vector.<BehaviorTask>(n, true);
         for (var ii :int = 0; ii < n; ++ii) {
             out.push(arr[ii]);
         }
@@ -145,7 +145,7 @@ public class TaskFactory
 }
 
 }
-import godmode.core.Task;
+import godmode.core.BehaviorTask;
 import godmode.decorator.LoopingDecorator;
 import godmode.decorator.PredicateFilter;
 import godmode.pred.Predicate;
@@ -157,22 +157,22 @@ class LoopingDecoratorBuilder {
     }
     
     /** Loops the task forever */
-    public function forever (task :Task) :Task {
+    public function forever (task :BehaviorTask) :BehaviorTask {
         return new LoopingDecorator(_name, LoopingDecorator.BREAK_NEVER, 0, task);
     }
     
     /** Loops the task until it succeeds */
-    public function untilSuccess (task :Task) :Task {
+    public function untilSuccess (task :BehaviorTask) :BehaviorTask {
         return new LoopingDecorator(_name, LoopingDecorator.BREAK_ON_SUCCESS, 0, task);
     }
     
     /** Loops the task until it fails */
-    public function untilFail (task :Task) :Task {
+    public function untilFail (task :BehaviorTask) :BehaviorTask {
         return new LoopingDecorator(_name, LoopingDecorator.BREAK_ON_FAIL, 0, task);
     }
      
     /** Loops the task the given number of times */
-    public function withCount (loopCount :int, task :Task) :Task {
+    public function withCount (loopCount :int, task :BehaviorTask) :BehaviorTask {
         return new LoopingDecorator(_name, LoopingDecorator.BREAK_NEVER, loopCount, task);
     }
     

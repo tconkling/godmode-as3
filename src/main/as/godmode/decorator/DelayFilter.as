@@ -3,19 +3,19 @@
 
 package godmode.decorator {
 
-import godmode.core.StatefulTask;
-import godmode.core.Task;
-import godmode.core.TaskContainer;
+import godmode.core.StatefulBehaviorTask;
+import godmode.core.BehaviorTask;
+import godmode.core.BehaviorTaskContainer;
 import godmode.core.TimeKeeper;
 import godmode.core.Value;
 
 /**
  * A decorator that prevents a task from being run more than once in the given interval.
  */
-public class DelayFilter extends StatefulTask
-    implements TaskContainer
+public class DelayFilter extends StatefulBehaviorTask
+    implements BehaviorTaskContainer
 {
-    public function DelayFilter (name :String, minDelay :Value, timeKeeper :TimeKeeper, task :Task) {
+    public function DelayFilter (name :String, minDelay :Value, timeKeeper :TimeKeeper, task :BehaviorTask) {
         super(name);
         _task = task;
         _minDelay = minDelay;
@@ -23,8 +23,8 @@ public class DelayFilter extends StatefulTask
         _lastCompletionTime = -Number.MAX_VALUE;
     }
     
-    public function get children () :Vector.<Task> {
-        return new <Task>[ _task ];
+    public function get children () :Vector.<BehaviorTask> {
+        return new <BehaviorTask>[ _task ];
     }
     
     override protected function reset () :void {
@@ -58,7 +58,7 @@ public class DelayFilter extends StatefulTask
         return status;
     }
     
-    protected var _task :Task;
+    protected var _task :BehaviorTask;
     protected var _minDelay :Value;
     protected var _timeKeeper :TimeKeeper;
     

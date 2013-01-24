@@ -3,26 +3,26 @@
 
 package godmode.decorator {
 
-import godmode.core.StatefulTask;
-import godmode.core.Task;
-import godmode.core.TaskContainer;
+import godmode.core.StatefulBehaviorTask;
+import godmode.core.BehaviorTask;
+import godmode.core.BehaviorTaskContainer;
 
-public class LoopingDecorator extends StatefulTask
-    implements TaskContainer
+public class LoopingDecorator extends StatefulBehaviorTask
+    implements BehaviorTaskContainer
 {
     public static const BREAK_NEVER :int = 0;
     public static const BREAK_ON_SUCCESS :int = 1;
     public static const BREAK_ON_FAIL :int = 2;
     
-    public function LoopingDecorator(name :String, type :int, loopCount :int, task :Task) {
+    public function LoopingDecorator(name :String, type :int, loopCount :int, task :BehaviorTask) {
         super(name);
         _task = task;
         _type = type;
         _targetLoopCount = loopCount;
     }
     
-    public function get children () :Vector.<Task> {
-        return new <Task>[ _task ];
+    public function get children () :Vector.<BehaviorTask> {
+        return new <BehaviorTask>[ _task ];
     }
     
     override public function get description () :String {
@@ -61,7 +61,7 @@ public class LoopingDecorator extends StatefulTask
         throw new Error("Unrecognized type: " + type);
     }
     
-    protected var _task :Task;
+    protected var _task :BehaviorTask;
     protected var _type :int;
     protected var _targetLoopCount :int;
     

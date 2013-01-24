@@ -4,9 +4,9 @@
 package godmode.selector {
 
 import godmode.core.RandomStream;
-import godmode.core.StatefulTask;
-import godmode.core.Task;
-import godmode.core.TaskContainer;
+import godmode.core.StatefulBehaviorTask;
+import godmode.core.BehaviorTask;
+import godmode.core.BehaviorTaskContainer;
 import godmode.util.Randoms;
 
 /**
@@ -15,8 +15,8 @@ import godmode.util.Randoms;
  * relative to the other tasks in the selector. (If all tasks have the same weight, the selection
  * is entirely random.)
  */
-public class WeightedSelector extends StatefulTask
-    implements TaskContainer
+public class WeightedSelector extends StatefulBehaviorTask
+    implements BehaviorTaskContainer
 {
     public function WeightedSelector (name :String, rng :RandomStream,
         children :Vector.<WeightedTask>) {
@@ -26,8 +26,8 @@ public class WeightedSelector extends StatefulTask
         _children = children;
     }
     
-    public function get children () :Vector.<Task> {
-        var out :Vector.<Task> = new Vector.<Task>(_children.length, true);
+    public function get children () :Vector.<BehaviorTask> {
+        var out :Vector.<BehaviorTask> = new Vector.<BehaviorTask>(_children.length, true);
         for each (var child :WeightedTask in _children) {
             out.push(child.task);
         }

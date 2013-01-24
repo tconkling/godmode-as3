@@ -2,17 +2,18 @@
 // godmode
 
 package godmode.core {
+
 import flash.utils.getQualifiedClassName;
 
-import godmode.util.TreePrinter;
+import godmode.util.BehaviorTreePrinter;
 
-public class Task
+public class BehaviorTask
 {
     public static const RUNNING :int = 1;
     public static const SUCCESS :int = 2;
     public static const FAIL :int = 3;
     
-    public function Task (name :String = null) {
+    public function BehaviorTask (name :String = null) {
         _name = name;
     }
     
@@ -38,7 +39,7 @@ public class Task
     }
     
     public final function getTreeStateString () :String {
-        return new TreePrinter(this).toString();
+        return new BehaviorTreePrinter(this).toString();
     }
     
     /** Returns a description of the task */

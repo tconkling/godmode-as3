@@ -4,12 +4,12 @@
 package godmode.core {
 
 /**
- * A Task that calls a function.
+ * A BehaviorTask that calls a function.
  * The function can optionally take a single 'Number' parameter (the time delta for this task)
  * The function can optionally return a Task status. If it does not, a status of SUCCESS will
  * be assumed.
  */
-public class FunctionTask extends Task
+public class FunctionTask extends BehaviorTask
 {
     public function FunctionTask (name :String, f :Function) {
         super(name);

@@ -3,15 +3,15 @@
 
 package godmode.selector {
 
-import godmode.core.StatefulTask;
-import godmode.core.Task;
-import godmode.core.TaskContainer;
+import godmode.core.StatefulBehaviorTask;
+import godmode.core.BehaviorTask;
+import godmode.core.BehaviorTaskContainer;
 
 /**
  * A selector that updates all children, every update, until a condition is met.
  */
-public class ParallelSelector extends StatefulTask
-    implements TaskContainer
+public class ParallelSelector extends StatefulBehaviorTask
+    implements BehaviorTaskContainer
 {
     public static const ALL_SUCCESS :int = 0;   // SUCCESS if all succeed. FAIL if any fail.
     public static const ANY_SUCCESS :int = 1;   // SUCCESS if any succeed. FAIL if all fail.
@@ -20,13 +20,13 @@ public class ParallelSelector extends StatefulTask
     public static const ALL_COMPLETE :int = 4;  // SUCCESS when all succeed or fail.
     public static const ANY_COMPLETE :int = 5;  // SUCCESS when any succeed or fail.
     
-    public function ParallelSelector (name :String, type :int, tasks :Vector.<Task>) {
+    public function ParallelSelector (name :String, type :int, tasks :Vector.<BehaviorTask>) {
         super(name);
         _type = type;
         _children = tasks;
     }
     
-    public function get children () :Vector.<Task> {
+    public function get children () :Vector.<BehaviorTask> {
         return _children;
     }
     
@@ -35,14 +35,14 @@ public class ParallelSelector extends StatefulTask
     }
     
     override protected function reset () :void {
-        for each (var task :Task in _children) {
+        for each (var task :BehaviorTask in _children) {
             task.deactivate();
         }
     }
     
     override protected function update (dt :Number) :int {
         var runningChildren :Boolean = false;
-        for each (var child :Task in _children) {
+        for each (var child :BehaviorTask in _children) {
             var childStatus :int = child.updateTask(dt);
             if (childStatus == SUCCESS) {
                 if (_type == ANY_SUCCESS || _type == ANY_COMPLETE) {
@@ -79,6 +79,6 @@ public class ParallelSelector extends StatefulTask
     }
     
     protected var _type :int;
-    protected var _children :Vector.<Task>
+    protected var _children :Vector.<BehaviorTask>
 }
 }

@@ -5,11 +5,11 @@ package godmode.core {
 
 /**
  * Base class for Tasks with state.
- * StatefulTasks can have activation and deactivation logic.
+ * StatefulBehaviorTask can have activation and deactivation logic.
  */
-public class StatefulTask extends Task
+public class StatefulBehaviorTask extends BehaviorTask
 {
-    public function StatefulTask (name :String = null) {
+    public function StatefulBehaviorTask (name :String = null) {
         super(name);
     }
     
