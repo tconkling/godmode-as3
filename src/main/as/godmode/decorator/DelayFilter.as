@@ -41,7 +41,7 @@ public class DelayFilter extends StatefulTask
             _inited = true;
         }
         
-        var now :Number = _timeKeeper.now();
+        var now :Number = _timeKeeper.timeNow();
         if (!_taskRunning && ((now - _lastCompletionTime) < _curDelay)) {
             // can't run.
             return FAIL;

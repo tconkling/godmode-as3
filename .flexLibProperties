@@ -26,6 +26,8 @@
     <classEntry path="godmode.selector.WeightedSelector"/>
     <classEntry path="godmode.selector.WeightedTask"/>
     <classEntry path="godmode.util.TreePrinter"/>
+    <classEntry path="godmode.TaskFactory"/>
+    <classEntry path="godmode.decorator.PredicateFilter"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

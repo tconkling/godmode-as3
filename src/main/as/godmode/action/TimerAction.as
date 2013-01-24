@@ -4,25 +4,31 @@
 package godmode.action {
 
 import godmode.core.StatefulTask;
+import godmode.core.Value;
 
 /** A Task that completes after a specified amount of time */
 public class TimerAction extends StatefulTask
 {
-    public function TimerAction (name :String, time :Number) {
-        _totalTime = time;
-        _elapsedTime = 0;
+    public function TimerAction (name :String, time :Value) {
+        _time = time;
+        reset();
     }
     
     override protected function reset () :void {
-        _elapsedTime = 0;
+        _thisTime = -1;
     }
     
     override protected function update (dt :Number) :int {
+        if (_thisTime < 0) {
+            _thisTime = Math.max(_time.getValue(), 0);
+            _elapsedTime = 0;
+        }
         _elapsedTime += dt;
-        return (_elapsedTime >= _totalTime ? SUCCESS : RUNNING);
+        return (_elapsedTime >= _thisTime ? SUCCESS : RUNNING);
     }
     
-    protected var _totalTime :Number;
+    protected var _time :Value;
+    protected var _thisTime :Number;
     protected var _elapsedTime :Number;
 }
 }
