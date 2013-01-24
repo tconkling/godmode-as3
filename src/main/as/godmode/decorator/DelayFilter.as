@@ -31,27 +31,18 @@ public class DelayFilter extends StatefulBehaviorTask
         if (_taskRunning) {
             _task.deactivate();
             _taskRunning = false;
-            _inited = false;
         }
     }
     
     override protected function updateTask (dt :Number) :int {
-        if (!_inited) {
-            _curDelay = _minDelay.value;
-            _inited = true;
-        }
-        
         var now :Number = _timeKeeper.timeNow();
-        if (!_taskRunning && ((now - _lastCompletionTime) < _curDelay)) {
+        if (!_taskRunning && ((now - _lastCompletionTime) < _minDelay.value)) {
             // can't run.
             return FAIL;
         }
         
         var status :int = _task.update(dt);
         _taskRunning = (status == RUNNING);
-        if (!_taskRunning) {
-            _inited = false;
-        }
         if (status == SUCCESS) {
             _lastCompletionTime = now;
         }
@@ -62,8 +53,6 @@ public class DelayFilter extends StatefulBehaviorTask
     protected var _minDelay :Value;
     protected var _timeKeeper :TimeKeeper;
     
-    protected var _inited :Boolean;
-    protected var _curDelay :Number;
     protected var _taskRunning :Boolean;
     protected var _lastCompletionTime :Number;
 }
