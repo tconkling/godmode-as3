@@ -13,6 +13,8 @@
     <classEntry path="godmode.core.TimeKeeper"/>
     <classEntry path="godmode.core.Value"/>
     <classEntry path="godmode.core.MutableValue"/>
+    <classEntry path="godmode.decorator.LoopingDecorator"/>
+    <classEntry path="godmode.decorator.SemaphoreGuardDecorator"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

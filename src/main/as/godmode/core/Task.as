@@ -2,6 +2,7 @@
 // godmode
 
 package godmode.core {
+import flash.utils.getQualifiedClassName;
 
 public class Task
 {
@@ -13,7 +14,10 @@ public class Task
         _name = name;
     }
     
-    /** Updates the task */
+    /**
+     * Updates the task.
+     * Subclasses do not override this function; instead they should override update()
+     */
     public final function updateTask (dt :Number) :int {
         return updateInternal(dt);
     }
@@ -27,9 +31,33 @@ public class Task
         deactivateInternal();
     }
     
+    /** Returns a description of the task */
+    public function get description () :String {
+        var out :String = className(this);
+        if (_name != null) {
+            out = '"' + _name + '" ' + out;
+        }
+        return out;
+    }
+    
     /** Subclasses override */
     protected function update (dt :Number) :int {
         return SUCCESS;
+    }
+    
+    protected static function statusName (status :int) :String {
+        switch (status) {
+        case RUNNING: return "RUNNING";
+        case SUCCESS: return "SUCCESS";
+        case FAIL: return "FAIL";
+        }
+        throw new Error("Unrecognized status: " + status);
+    }
+    
+    protected static function className (obj :Object) :String {
+        var s :String = getQualifiedClassName(obj).replace("::", ".");
+        var dex :int = s.lastIndexOf(".");
+        return s.substring(dex + 1); // works even if dex is -1
     }
     
     internal function updateInternal (dt :Number) :int {
