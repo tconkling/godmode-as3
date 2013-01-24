@@ -8,6 +8,11 @@
     <classEntry path="godmode.core.FunctionTask"/>
     <classEntry path="godmode.core.Semaphore"/>
     <classEntry path="godmode.action.NoOpAction"/>
+    <classEntry path="godmode.action.TimerAction"/>
+    <classEntry path="godmode.decorator.DelayFilter"/>
+    <classEntry path="godmode.core.TimeKeeper"/>
+    <classEntry path="godmode.core.Value"/>
+    <classEntry path="godmode.core.MutableValue"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
