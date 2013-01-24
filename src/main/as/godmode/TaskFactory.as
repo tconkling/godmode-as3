@@ -3,14 +3,14 @@
 
 package godmode {
 
-import godmode.action.NoOpAction;
-import godmode.action.TimerAction;
-import godmode.core.FunctionTask;
+import godmode.task.NoOpAction;
+import godmode.task.TimerAction;
+import godmode.task.FunctionTask;
 import godmode.core.RandomStream;
 import godmode.core.Semaphore;
 import godmode.core.BehaviorTask;
 import godmode.core.TimeKeeper;
-import godmode.core.Value;
+import godmode.data.Value;
 import godmode.decorator.DelayFilter;
 import godmode.decorator.LoopingDecorator;
 import godmode.decorator.PredicateFilter;

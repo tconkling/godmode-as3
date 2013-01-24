@@ -1,7 +1,7 @@
 //
 // godmode
 
-package godmode.action {
+package godmode.task {
 
 import godmode.core.BehaviorTask;
 

@@ -1,14 +1,23 @@
 //
 // godmode
 
-package godmode.core {
+package godmode.data {
 
 import flash.utils.Dictionary;
 
+/**
+ * Shared data storage for BehaviorTasks. A Blackboard represents an entity's "body of knowledge".
+ * (Entities might employ multiple Blackboards - eg, a squad made up of multiple entities might
+ * have "squad knowledge" stored in a Blackboard shared across the squad.)
+ *
+ * Entity-specific tasks can use a Blackboard directly, but it may be more useful for generic
+ * tasks to operate on "value accessors", which expose a single blackboard value, and are
+ * created with "getAccessor()" function.
+ */
 public class Blackboard
 {
     /** Creates an accessor for the given key in the blackboard. */
-    public function accessorFor (key :String, type :Class, defaultVal :* = undefined) :MutableValue {
+    public function getAccessor (key :String, type :Class, defaultVal :* = undefined) :MutableValue {
         return new BlackboardAccessor(this, key, type, defaultVal);
     }
     
@@ -33,8 +42,8 @@ public class Blackboard
 }
 }
 
-import godmode.core.Blackboard;
-import godmode.core.MutableValue;
+import godmode.data.Blackboard;
+import godmode.data.MutableValue;
 
 class BlackboardAccessor
     implements MutableValue

@@ -1,7 +1,8 @@
 //
 // godmode
 
-package godmode.core {
+package godmode.task {
+import godmode.core.BehaviorTask;
 
 /**
  * A BehaviorTask that calls a function.

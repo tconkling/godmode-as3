@@ -1,7 +1,7 @@
 //
 // godmode
 
-package godmode.core {
+package godmode.data {
 
 public interface MutableValue extends Value
 {

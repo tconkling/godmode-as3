@@ -1,10 +1,10 @@
 //
 // godmode
 
-package godmode.action {
+package godmode.task {
 
 import godmode.core.StatefulBehaviorTask;
-import godmode.core.Value;
+import godmode.data.Value;
 
 /** A Task that completes after a specified amount of time */
 public class TimerAction extends StatefulBehaviorTask

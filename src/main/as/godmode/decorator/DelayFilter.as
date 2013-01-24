@@ -7,7 +7,7 @@ import godmode.core.StatefulBehaviorTask;
 import godmode.core.BehaviorTask;
 import godmode.core.BehaviorTaskContainer;
 import godmode.core.TimeKeeper;
-import godmode.core.Value;
+import godmode.data.Value;
 
 /**
  * A decorator that prevents a task from being run more than once in the given interval.

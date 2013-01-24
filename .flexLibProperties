@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
   <includeClasses>
-    <classEntry path="godmode.core.Blackboard"/>
+    <classEntry path="godmode.data.Blackboard"/>
     <classEntry path="godmode.core.BehaviorTask"/>
     <classEntry path="godmode.core.BehaviorTaskContainer"/>
     <classEntry path="godmode.core.StatefulBehaviorTask"/>
-    <classEntry path="godmode.core.FunctionTask"/>
+    <classEntry path="godmode.task.FunctionTask"/>
     <classEntry path="godmode.core.Semaphore"/>
-    <classEntry path="godmode.action.NoOpAction"/>
-    <classEntry path="godmode.action.TimerAction"/>
+    <classEntry path="godmode.task.NoOpAction"/>
+    <classEntry path="godmode.task.TimerAction"/>
     <classEntry path="godmode.decorator.DelayFilter"/>
     <classEntry path="godmode.core.TimeKeeper"/>
-    <classEntry path="godmode.core.Value"/>
-    <classEntry path="godmode.core.MutableValue"/>
+    <classEntry path="godmode.data.Value"/>
+    <classEntry path="godmode.data.MutableValue"/>
     <classEntry path="godmode.decorator.LoopingDecorator"/>
     <classEntry path="godmode.decorator.SemaphoreGuardDecorator"/>
     <classEntry path="godmode.pred.Predicate"/>
