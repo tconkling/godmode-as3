@@ -33,11 +33,11 @@ public class PrioritySelector extends StatefulBehaviorTask
         }
     }
     
-    override protected function update (dt :Number) :int {
+    override protected function updateTask (dt :Number) :int {
         // iterate all children till we find one that doesn't fail
         var status :int = SUCCESS;
         for each (var task :BehaviorTask in _children) {
-            status = task.updateTask(dt);
+            status = task.update(dt);
             
             // if the child succeeded, or is still running, we exit the loop
             if (status != FAIL) {

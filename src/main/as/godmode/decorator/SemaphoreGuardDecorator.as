@@ -33,14 +33,14 @@ public class SemaphoreGuardDecorator extends StatefulBehaviorTask
         _task.deactivate();
     }
     
-    override protected function update (dt :Number) :int {
+    override protected function updateTask (dt :Number) :int {
         if (!_semaphoreAcquired) {
             _semaphoreAcquired = _semaphore.acquire();
             if (!_semaphoreAcquired) {
                 return FAIL;
             }
         }
-        return _task.updateTask(dt);
+        return _task.update(dt);
     }
     
     protected var _task :BehaviorTask;

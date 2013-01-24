@@ -34,8 +34,8 @@ public class LoopingDecorator extends StatefulBehaviorTask
         _task.deactivate();
     }
     
-    override protected function update (dt :Number) :int {
-        var status :int = _task.updateTask(dt);
+    override protected function updateTask (dt :Number) :int {
+        var status :int = _task.update(dt);
         if (status == RUNNING) {
             return RUNNING;
         }

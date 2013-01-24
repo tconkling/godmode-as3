@@ -41,11 +41,11 @@ public class WeightedSelector extends StatefulBehaviorTask
         }
     }
     
-    override protected function update (dt :Number) :int {
+    override protected function updateTask (dt :Number) :int {
         // Are we already running a task?
         var status :int;
         if (_curChild != null) {
-            status = _curChild.task.updateTask(dt);
+            status = _curChild.task.update(dt);
             
             // The task completed
             if (status != RUNNING) {
@@ -66,7 +66,7 @@ public class WeightedSelector extends StatefulBehaviorTask
             // skip this task on our next call to chooseNextChild
             child.skip = true;
             
-            status = child.task.updateTask(dt);
+            status = child.task.update(dt);
             if (status == RUNNING) {
                 _curChild = child;
             }

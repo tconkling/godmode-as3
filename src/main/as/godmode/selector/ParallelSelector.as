@@ -40,10 +40,10 @@ public class ParallelSelector extends StatefulBehaviorTask
         }
     }
     
-    override protected function update (dt :Number) :int {
+    override protected function updateTask (dt :Number) :int {
         var runningChildren :Boolean = false;
         for each (var child :BehaviorTask in _children) {
-            var childStatus :int = child.updateTask(dt);
+            var childStatus :int = child.update(dt);
             if (childStatus == SUCCESS) {
                 if (_type == ANY_SUCCESS || _type == ANY_COMPLETE) {
                     return SUCCESS;

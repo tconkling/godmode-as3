@@ -22,7 +22,7 @@ public class StatefulBehaviorTask extends BehaviorTask
     }
     
     override internal function updateInternal (dt :Number) :int {
-        _lastStatus = update(dt);
+        _lastStatus = updateTask(dt);
         _running = (_lastStatus == RUNNING);
         if (!_running) {
             reset();

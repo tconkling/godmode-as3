@@ -18,10 +18,11 @@ public class BehaviorTask
     }
     
     /**
-     * Updates the task.
-     * Subclasses do not override this function; instead they should override update()
+     * Updates the behavior tree.
+     *
+     * Subclasses do not override this function; instead they should override updateTask()
      */
-    public final function updateTask (dt :Number) :int {
+    public final function update (dt :Number) :int {
         return updateInternal(dt);
     }
     
@@ -52,7 +53,7 @@ public class BehaviorTask
     }
     
     /** Subclasses override */
-    protected function update (dt :Number) :int {
+    protected function updateTask (dt :Number) :int {
         return SUCCESS;
     }
     
@@ -63,7 +64,7 @@ public class BehaviorTask
     }
     
     internal function updateInternal (dt :Number) :int {
-        _lastStatus = update(dt);
+        _lastStatus = updateTask(dt);
         return _lastStatus;
     }
     

@@ -35,7 +35,7 @@ public class DelayFilter extends StatefulBehaviorTask
         }
     }
     
-    override protected function update (dt :Number) :int {
+    override protected function updateTask (dt :Number) :int {
         if (!_inited) {
             _curDelay = _minDelay.getValue();
             _inited = true;
@@ -47,7 +47,7 @@ public class DelayFilter extends StatefulBehaviorTask
             return FAIL;
         }
         
-        var status :int = _task.updateTask(dt);
+        var status :int = _task.update(dt);
         _taskRunning = (status == RUNNING);
         if (!_taskRunning) {
             _inited = false;

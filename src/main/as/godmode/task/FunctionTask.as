@@ -17,7 +17,7 @@ public class FunctionTask extends BehaviorTask
         _f = f;
     }
     
-    override protected function update (dt :Number) :int {
+    override protected function updateTask (dt :Number) :int {
         var val :* = (_f.length == 1 ? _f(dt) : _f());
         return (val is int ? val as int : SUCCESS);
     }

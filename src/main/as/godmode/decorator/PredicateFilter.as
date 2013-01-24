@@ -26,12 +26,12 @@ public class PredicateFilter extends StatefulBehaviorTask
         _task.deactivate();
     }
     
-    override protected function update (dt :Number) :int {
+    override protected function updateTask (dt :Number) :int {
         // call _pred.updateTask so that the pred's _lastStatus gets set
-        if (_pred.updateTask(dt) != SUCCESS) {
+        if (_pred.update(dt) != SUCCESS) {
             return FAIL;
         }
-        return _task.updateTask(dt);
+        return _task.update(dt);
     }
     
     protected var _pred :Predicate;

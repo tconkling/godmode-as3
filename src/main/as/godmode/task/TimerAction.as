@@ -18,7 +18,7 @@ public class TimerAction extends StatefulBehaviorTask
         _thisTime = -1;
     }
     
-    override protected function update (dt :Number) :int {
+    override protected function updateTask (dt :Number) :int {
         if (_thisTime < 0) {
             _thisTime = Math.max(_time.getValue(), 0);
             _elapsedTime = 0;

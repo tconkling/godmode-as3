@@ -17,7 +17,7 @@ public class Predicate extends BehaviorTask
         throw new Error("not implemented");
     }
     
-    override final protected function update (dt :Number) :int {
+    override final protected function updateTask (dt :Number) :int {
         return (evaluate() ? SUCCESS : FAIL);
     }
 }

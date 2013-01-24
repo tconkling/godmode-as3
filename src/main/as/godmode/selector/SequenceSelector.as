@@ -31,10 +31,10 @@ public class SequenceSelector extends StatefulBehaviorTask
         _childIdx = 0;
     }
     
-    override protected function update (dt :Number) :int {
+    override protected function updateTask (dt :Number) :int {
         while (_childIdx < _children.length) {
             _curChild = _children[_childIdx];
-            var childStatus :int = _curChild.updateTask(dt);
+            var childStatus :int = _curChild.update(dt);
             if (childStatus == SUCCESS) {
                 // the child completed. Move on to the next.
                 _curChild = null;
