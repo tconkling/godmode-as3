@@ -25,11 +25,11 @@
     <classEntry path="godmode.selector.SequenceSelector"/>
     <classEntry path="godmode.selector.WeightedSelector"/>
     <classEntry path="godmode.selector.WeightedTask"/>
-    <classEntry path="godmode.core.TreePrinter"/>
     <classEntry path="godmode.TaskFactory"/>
     <classEntry path="godmode.decorator.PredicateFilter"/>
     <classEntry path="godmode.pred.ValueExistsPred"/>
     <classEntry path="godmode.task.RemoveValueAction"/>
+    <classEntry path="godmode.core.BehaviorTree"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

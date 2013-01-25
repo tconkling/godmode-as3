@@ -29,12 +29,6 @@ public class BehaviorTask
         deactivateInternal();
     }
     
-    /** Creates a human-readable string describing the current state of the behavior tree */
-    public final function getTreeStateString () :String {
-        return new TreePrinter(this).toString();
-    }
-    
-    
     /** Returns a description of the task. Subclasses can optionally override. */
     public function get description () :String {
         var out :String = className(this);
@@ -63,11 +57,7 @@ public class BehaviorTask
     internal function deactivateInternal () :void {
     }
     
-    internal final function get status () :int {
-        return _lastStatus;
-    }
-    
     internal var _name :String;
-    protected var _lastStatus :int;
+    internal var _lastStatus :int;
 }
 }
