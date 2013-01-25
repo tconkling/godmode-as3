@@ -14,8 +14,7 @@ public class LoopingDecorator extends StatefulBehaviorTask
     public static const BREAK_ON_SUCCESS :int = 1;
     public static const BREAK_ON_FAIL :int = 2;
     
-    public function LoopingDecorator(name :String, type :int, loopCount :int, task :BehaviorTask) {
-        super(name);
+    public function LoopingDecorator(type :int, loopCount :int, task :BehaviorTask) {
         _task = task;
         _type = type;
         _targetLoopCount = loopCount;

@@ -9,7 +9,7 @@ import godmode.data.Value;
 /** A Task that completes after a specified amount of time */
 public class TimerAction extends StatefulBehaviorTask
 {
-    public function TimerAction (name :String, time :Value) {
+    public function TimerAction (time :Value) {
         _time = time;
         reset();
     }

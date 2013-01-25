@@ -11,8 +11,7 @@ import godmode.core.BehaviorTaskContainer;
 public class SemaphoreGuardDecorator extends StatefulBehaviorTask
     implements BehaviorTaskContainer
 {
-    public function SemaphoreGuardDecorator (name :String, semaphore :Semaphore, task :BehaviorTask) {
-        super(name);
+    public function SemaphoreGuardDecorator (semaphore :Semaphore, task :BehaviorTask) {
         _task = task;
         _semaphore = semaphore;
     }

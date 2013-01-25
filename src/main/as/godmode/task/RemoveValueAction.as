@@ -8,8 +8,7 @@ import godmode.data.MutableValue;
 
 public class RemoveValueAction extends BehaviorTask
 {
-    public function RemoveValueAction (name :String, value :MutableValue) {
-        super(name);
+    public function RemoveValueAction (value :MutableValue) {
         _value = value;
     }
     

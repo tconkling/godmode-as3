@@ -15,8 +15,7 @@ import godmode.data.Value;
 public class DelayFilter extends StatefulBehaviorTask
     implements BehaviorTaskContainer
 {
-    public function DelayFilter (name :String, minDelay :Value, timeKeeper :TimeKeeper, task :BehaviorTask) {
-        super(name);
+    public function DelayFilter (minDelay :Value, timeKeeper :TimeKeeper, task :BehaviorTask) {
         _task = task;
         _minDelay = minDelay;
         _timeKeeper = timeKeeper;

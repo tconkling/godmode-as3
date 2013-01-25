@@ -9,10 +9,6 @@ package godmode.core {
  */
 public class StatefulBehaviorTask extends BehaviorTask
 {
-    public function StatefulBehaviorTask (name :String = null) {
-        super(name);
-    }
-    
     /**
      * Subclasses can override this to reset any state associated with the task.
      * reset() is called whenever the task stops running, either as a result of

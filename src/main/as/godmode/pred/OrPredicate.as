@@ -9,8 +9,7 @@ import godmode.core.BehaviorTaskContainer;
 public class OrPredicate extends Predicate
     implements BehaviorTaskContainer
 {
-    public function OrPredicate (name :String, preds :Vector.<Predicate>) {
-        super(name);
+    public function OrPredicate (preds :Vector.<Predicate>) {
         _preds = preds;
     }
     

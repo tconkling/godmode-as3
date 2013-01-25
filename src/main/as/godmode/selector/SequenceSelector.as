@@ -14,8 +14,7 @@ import godmode.core.BehaviorTaskContainer;
 public class SequenceSelector extends StatefulBehaviorTask
     implements BehaviorTaskContainer
 {
-    public function SequenceSelector (name :String, children :Vector.<BehaviorTask>) {
-        super(name);
+    public function SequenceSelector (children :Vector.<BehaviorTask>) {
         _children = children;
     }
     

@@ -9,8 +9,7 @@ import godmode.core.BehaviorTaskContainer;
 public class NotPredicate extends Predicate
     implements BehaviorTaskContainer
 {
-    public function NotPredicate (name :String, pred :Predicate) {
-        super(name);
+    public function NotPredicate (pred :Predicate) {
         _pred = pred;
     }
     

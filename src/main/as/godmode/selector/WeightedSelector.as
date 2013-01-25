@@ -18,10 +18,7 @@ import godmode.util.Randoms;
 public class WeightedSelector extends StatefulBehaviorTask
     implements BehaviorTaskContainer
 {
-    public function WeightedSelector (name :String, rng :RandomStream,
-        children :Vector.<WeightedTask>) {
-        
-        super(name);
+    public function WeightedSelector (rng :RandomStream, children :Vector.<WeightedTask>) {
         _rands = new Randoms(rng);
         _children = children;
     }

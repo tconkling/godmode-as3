@@ -12,8 +12,7 @@ import godmode.core.BehaviorTask;
  */
 public class FunctionTask extends BehaviorTask
 {
-    public function FunctionTask (name :String, f :Function) {
-        super(name);
+    public function FunctionTask (f :Function) {
         _f = f;
     }
     

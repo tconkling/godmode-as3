@@ -42,42 +42,42 @@ public class TaskFactory
     
     /** Runs the given task if its predicates succeed */
     public function ifThen (pred :Predicate, task :BehaviorTask) :BehaviorTask {
-        return new PredicateFilter(takeName(), pred, task);
+        return new PredicateFilter(pred, task);
     }
     
     /** Runs children in sequence until one fails, or all succeed */
     public function sequence (...children) :BehaviorTask {
-        return new SequenceSelector(takeName(), taskVector(children));
+        return new SequenceSelector(taskVector(children));
     }
     
     /** Runs all children concurrently until one fails */
     public function parallel (...children) :BehaviorTask {
-        return new ParallelSelector(takeName(), ParallelSelector.ALL_SUCCESS, taskVector(children));
+        return new ParallelSelector(ParallelSelector.ALL_SUCCESS, taskVector(children));
     }
     
     /** Runs a task a specified number of times */
     public function forCount (count :int, task :BehaviorTask) :BehaviorTask {
-        return new LoopingDecorator(takeName(), LoopingDecorator.BREAK_NEVER, count, task);
+        return new LoopingDecorator(LoopingDecorator.BREAK_NEVER, count, task);
     }
     
     /** Loops a task forever */
     public function forever (task :BehaviorTask) :BehaviorTask {
-        return new LoopingDecorator(takeName(), LoopingDecorator.BREAK_NEVER, 0, task);
+        return new LoopingDecorator(LoopingDecorator.BREAK_NEVER, 0, task);
     }
     
     /** Runs a task until it succeeds */
     public function untilSuccess (task :BehaviorTask) :BehaviorTask {
-        return new LoopingDecorator(takeName(), LoopingDecorator.BREAK_ON_SUCCESS, 0, task);
+        return new LoopingDecorator(LoopingDecorator.BREAK_ON_SUCCESS, 0, task);
     }
     
     /** Loops a task until it fails */
     public function untilFail (task :BehaviorTask) :BehaviorTask {
-        return new LoopingDecorator(takeName(), LoopingDecorator.BREAK_ON_FAIL, 0, task);
+        return new LoopingDecorator(LoopingDecorator.BREAK_ON_FAIL, 0, task);
     }
     
     /** Runs a task, and ensure that it won't be re-run until a minimum amount of time has elapsed */
     public function withRepeatDelay (minDelay :Value, task :BehaviorTask) :BehaviorTask {
-        return new DelayFilter(takeName(), minDelay, _timeKeeper, task);
+        return new DelayFilter(minDelay, _timeKeeper, task);
     }
     
     /**
@@ -86,7 +86,7 @@ public class TaskFactory
      * are running.
      */
     public function selectWithPriority (...children) :BehaviorTask {
-        return new PrioritySelector(takeName(), taskVector(children));
+        return new PrioritySelector(taskVector(children));
     }
     
     /** Randomly selects a task to run */
@@ -96,52 +96,52 @@ public class TaskFactory
         for (var ii :int = 0; ii < n; ii += 2) {
             children.push(new WeightedTask(childrenAndWeights[ii], childrenAndWeights[ii + 1]));
         }
-        return new WeightedSelector(takeName(), rng, children);
+        return new WeightedSelector(rng, children);
     }
     
     /** Wait a specified amount of time */
     public function wait (time :Value) :BehaviorTask {
-        return new TimerAction(takeName(), time);
+        return new TimerAction(time);
     }
     
     /** Calls a function */
     public function call (f :Function) :BehaviorTask {
-        return new FunctionTask(takeName(), f);
+        return new FunctionTask(f);
     }
     
     /** Runs a task if the given semaphore is successfully acquired */
     public function withGuard (semaphore :Semaphore, task :BehaviorTask) :BehaviorTask {
-        return new SemaphoreGuardDecorator(takeName(), semaphore, task);
+        return new SemaphoreGuardDecorator(semaphore, task);
     }
     
     /** Removes the given value from its blackboard */
     public function removeValue (value :MutableValue) :BehaviorTask {
-        return new RemoveValueAction(takeName(), value);
+        return new RemoveValueAction(value);
     }
     
     /** Does nothing */
     public function noOp () :BehaviorTask {
-        return new NoOpAction(takeName());
+        return new NoOpAction();
     }
     
     /** Returns !pred */
     public function not (pred :Predicate) :Predicate {
-        return new NotPredicate(takeName(), pred);
+        return new NotPredicate(pred);
     }
     
     /** ANDs the given preds together */
     public function and (...preds) :Predicate {
-        return new AndPredicate(takeName(), predVector(preds));
+        return new AndPredicate(predVector(preds));
     }
     
     /** ORs the given preds together */
     public function or (...preds) :Predicate {
-        return new OrPredicate(takeName(), predVector(preds));
+        return new OrPredicate(predVector(preds));
     }
     
     /** Tests the existence of the given value in its blackboard */
     public function valueExists (value :Value) :Predicate {
-        return new ValueExistsPred(takeName(), value);
+        return new ValueExistsPred(value);
     }
     
     protected function takeName () :String {

@@ -7,8 +7,7 @@ import godmode.data.Value;
 
 public class ValueExistsPred extends Predicate
 {
-    public function ValueExistsPred (name :String, value :Value) {
-        super(name);
+    public function ValueExistsPred (value :Value) {
         _value = value;
     }
     

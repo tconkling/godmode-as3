@@ -12,8 +12,7 @@ import godmode.pred.Predicate;
 public class PredicateFilter extends StatefulBehaviorTask
     implements BehaviorTaskContainer
 {
-    public function PredicateFilter (name :String, pred :Predicate, task :BehaviorTask) {
-        super(name);
+    public function PredicateFilter (pred :Predicate, task :BehaviorTask) {
         _pred = pred;
         _task = task;
     }

@@ -5,8 +5,7 @@ package godmode.pred {
 
 public class FunctionPredicate extends Predicate
 {
-    public function FunctionPredicate (name :String, f :Function) {
-        super(name);
+    public function FunctionPredicate (f :Function) {
         _f = f;
     }
     

@@ -17,8 +17,7 @@ import godmode.core.BehaviorTaskContainer;
 public class PrioritySelector extends StatefulBehaviorTask
     implements BehaviorTaskContainer
 {
-    public function PrioritySelector (name :String, children :Vector.<BehaviorTask>) {
-        super(name);
+    public function PrioritySelector (children :Vector.<BehaviorTask>) {
         _children = children;
     }
     

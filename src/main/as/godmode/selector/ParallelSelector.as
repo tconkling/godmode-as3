@@ -20,8 +20,7 @@ public class ParallelSelector extends StatefulBehaviorTask
     public static const ALL_COMPLETE :int = 4;  // SUCCESS when all succeed or fail.
     public static const ANY_COMPLETE :int = 5;  // SUCCESS when any succeed or fail.
     
-    public function ParallelSelector (name :String, type :int, tasks :Vector.<BehaviorTask>) {
-        super(name);
+    public function ParallelSelector (type :int, tasks :Vector.<BehaviorTask>) {
         _type = type;
         _children = tasks;
     }

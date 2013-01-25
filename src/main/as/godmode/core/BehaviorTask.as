@@ -11,10 +11,6 @@ public class BehaviorTask
     public static const SUCCESS :int = 2;
     public static const FAIL :int = 3;
     
-    public function BehaviorTask (name :String = null) {
-        _name = name;
-    }
-    
     /**
      * Updates the behavior tree.
      *
@@ -71,7 +67,7 @@ public class BehaviorTask
         return _lastStatus;
     }
     
-    protected var _name :String;
+    internal var _name :String;
     protected var _lastStatus :int;
 }
 }
