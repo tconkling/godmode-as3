@@ -34,11 +34,12 @@ public class TaskFactory
         _timeKeeper = timeKeeper;
     }
     
-    /** Causes the next task created by the factory to have the given name */
-    public function withName (name :String) :TaskFactory {
-        _name = name;
-        return this;
-    }
+// TODO
+//    /** Causes the next task created by the factory to have the given name */
+//    public function withName (name :String) :TaskFactory {
+//        _name = name;
+//        return this;
+//    }
     
     /** Runs the given task if its predicates succeed */
     public function ifThen (pred :Predicate, task :BehaviorTask) :BehaviorTask {
@@ -144,12 +145,6 @@ public class TaskFactory
         return new ValueExistsPred(value);
     }
     
-    protected function takeName () :String {
-        var name :String = _name;
-        _name = null;
-        return name;
-    }
-    
     protected function taskVector (arr :Array) :Vector.<BehaviorTask> {
         var n :int = arr.length;
         var out :Vector.<BehaviorTask> = new Vector.<BehaviorTask>(n, true);
@@ -168,7 +163,6 @@ public class TaskFactory
         return out;
     }
     
-    protected var _name :String;
     protected var _timeKeeper :TimeKeeper;
 }
 
