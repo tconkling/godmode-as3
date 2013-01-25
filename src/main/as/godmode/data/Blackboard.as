@@ -17,13 +17,14 @@ import flash.utils.Dictionary;
 public class Blackboard
 {
     /** Creates an accessor for the given key in the blackboard. */
-    public function getAccessor (key :String, type :Class, defaultVal :* = undefined) :MutableValue {
-        return new BlackboardAccessor(this, key, type, defaultVal);
+    public function getAccessor (key :String, defaultVal :* = undefined) :MutableValue {
+        return new BlackboardAccessor(this, key, defaultVal);
     }
     
     /** @return true if a value with the given key is in the blackboard */
     public function contains (key :String) :Boolean {
-        return (key in _dict);
+        var val :Object = retrieve(key);
+        return (val != null);
     }
     
     /** Removes the value with the given key from the blackboard (if the key exists) */
@@ -33,6 +34,7 @@ public class Blackboard
     
     /** Stores a value in the blackboard, with the given key. The value must not be null. */
     public function store (key :String, val :*) :void {
+        val = toBlackboard(val);
         if (val == null) {
             throw new Error("cannot store null in a blackboard");
         }
@@ -43,9 +45,22 @@ public class Blackboard
      * @return the value stored in the blackboard for the given key
      * (or null/undefined if the key does not exist).
      */
-    public function retrieve (key :String, type :Class, defaultVal :* = undefined) :* {
+    public function retrieve (key :String, defaultVal :* = undefined) :* {
         var val :* = _dict[key];
-        return (val is type ? val : defaultVal);
+        if (val != null) {
+            val = fromBlackboard(val);
+        }
+        return (val != null ? val : defaultVal);
+    }
+    
+    /** Subclasses can override to transform values before they're stored in the blackboard */
+    protected function toBlackboard (val :*) :* {
+        return val;
+    }
+    
+    /** Subclasses can override to transform values before they're returned fromthe blackboard */
+    protected function fromBlackboard (val :*) :* {
+        return val;
     }
     
     protected var _dict :Dictionary = new Dictionary();
@@ -58,10 +73,9 @@ import godmode.data.MutableValue;
 class BlackboardAccessor
     implements MutableValue
 {
-    public function BlackboardAccessor (bb :Blackboard, key :String, type :Class, defaultVal :*) {
+    public function BlackboardAccessor (bb :Blackboard, key :String, defaultVal :*) {
         _bb = bb;
         _key = key;
-        _type = type;
         _defaultVal = defaultVal;
     }
     
@@ -70,7 +84,7 @@ class BlackboardAccessor
     }
     
     public function get value () :* {
-        return _bb.retrieve(_key, _type, _defaultVal);
+        return _bb.retrieve(_key, _defaultVal);
     }
     
     public function store (val :*) :void {
@@ -83,7 +97,6 @@ class BlackboardAccessor
     
     protected var _bb :Blackboard;
     protected var _key :String;
-    protected var _type :Class;
     protected var _defaultVal :*;
 }
 
