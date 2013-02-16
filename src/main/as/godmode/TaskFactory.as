@@ -42,9 +42,22 @@ public class TaskFactory
 //        return this;
 //    }
 
-    /** Runs the given task if its predicates succeed */
-    public function ifThen (pred :Predicate, task :BehaviorTask) :BehaviorTask {
+    /** Runs the given task while the predicate is true */
+    public function runWhile (pred :Predicate, task :BehaviorTask) :BehaviorTask {
         return new PredicateFilter(pred, task);
+    }
+
+    /**
+     * Runs the given task if the predicate is true. The predicate is only evaluated
+     * before entering the task.
+     */
+    public function enterIf (pred :Predicate, task :BehaviorTask) :BehaviorTask {
+        return sequence(pred, task);
+    }
+
+    /** Stops running the task if the predicate is true */
+    public function exitIf (pred :Predicate, task :BehaviorTask) :BehaviorTask {
+        return runWhile(new NotPredicate(pred), task);
     }
 
     /** Runs children in sequence until one fails, or all succeed */
