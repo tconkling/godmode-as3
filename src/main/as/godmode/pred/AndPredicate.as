@@ -12,11 +12,11 @@ public class AndPredicate extends Predicate
     public function AndPredicate (preds :Vector.<Predicate>) {
         _preds = preds;
     }
-    
+
     public function get children () :Vector.<BehaviorTask> {
         return Vector.<BehaviorTask>(_preds);
     }
-    
+
     override public function evaluate () :Boolean {
         for each (var pred :Predicate in _preds) {
             if (!pred.evaluate()) {
@@ -25,7 +25,7 @@ public class AndPredicate extends Predicate
         }
         return true;
     }
-    
+
     protected var _preds :Vector.<Predicate>;
 }
 }

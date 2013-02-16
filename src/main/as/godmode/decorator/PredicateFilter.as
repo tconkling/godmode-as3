@@ -16,15 +16,15 @@ public class PredicateFilter extends StatefulBehaviorTask
         _pred = pred;
         _task = task;
     }
-    
+
     public function get children () :Vector.<BehaviorTask> {
         return new <BehaviorTask>[ _pred, _task ];
     }
-    
+
     override protected function reset () :void {
         _task.deactivate();
     }
-    
+
     override protected function updateTask (dt :Number) :int {
         // call _pred.updateTask so that the pred's _lastStatus gets set
         if (_pred.update(dt) != SUCCESS) {
@@ -32,7 +32,7 @@ public class PredicateFilter extends StatefulBehaviorTask
         }
         return _task.update(dt);
     }
-    
+
     protected var _pred :Predicate;
     protected var _task :BehaviorTask;
 }

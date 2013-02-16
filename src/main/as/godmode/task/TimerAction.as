@@ -13,11 +13,11 @@ public class TimerAction extends StatefulBehaviorTask
         _time = time;
         reset();
     }
-    
+
     override protected function reset () :void {
         _thisTime = -1;
     }
-    
+
     override protected function updateTask (dt :Number) :int {
         if (_thisTime < 0) {
             _thisTime = Math.max(_time.value, 0);
@@ -26,7 +26,7 @@ public class TimerAction extends StatefulBehaviorTask
         _elapsedTime += dt;
         return (_elapsedTime >= _thisTime ? SUCCESS : RUNNING);
     }
-    
+
     protected var _time :Entry;
     protected var _thisTime :Number;
     protected var _elapsedTime :Number;

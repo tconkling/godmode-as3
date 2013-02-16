@@ -20,24 +20,24 @@ public class PrioritySelector extends StatefulBehaviorTask
     public function PrioritySelector (children :Vector.<BehaviorTask>) {
         _children = children;
     }
-    
+
     public function get children () :Vector.<BehaviorTask> {
         return _children;
     }
-    
+
     override protected function reset () :void {
         if (_runningTask != null) {
             _runningTask.deactivate();
             _runningTask = null;
         }
     }
-    
+
     override protected function updateTask (dt :Number) :int {
         // iterate all children till we find one that doesn't fail
         var status :int = SUCCESS;
         for each (var task :BehaviorTask in _children) {
             status = task.update(dt);
-            
+
             // if the child succeeded, or is still running, we exit the loop
             if (status != FAIL) {
                 // Did we interrupt a lower-priority task that was already running?
@@ -46,15 +46,15 @@ public class PrioritySelector extends StatefulBehaviorTask
                 if (_runningTask != task && _runningTask != null) {
                     _runningTask.deactivate();
                 }
-                
+
                 _runningTask = (status == RUNNING ? task : null);
                 break;
             }
         }
-        
+
         return status;
     }
-    
+
     protected var _children :Vector.<BehaviorTask>;
     protected var _runningTask :BehaviorTask;
 }

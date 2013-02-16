@@ -22,7 +22,7 @@ public class WeightedSelector extends StatefulBehaviorTask
         _rands = new Randoms(rng);
         _children = children;
     }
-    
+
     public function get children () :Vector.<BehaviorTask> {
         var out :Vector.<BehaviorTask> = new Vector.<BehaviorTask>(_children.length, true);
         for each (var child :WeightedTask in _children) {
@@ -30,44 +30,44 @@ public class WeightedSelector extends StatefulBehaviorTask
         }
         return out;
     }
-    
+
     override protected function reset () :void {
         if (_curChild != null) {
             _curChild.task.deactivate();
             _curChild = null;
         }
     }
-    
+
     override protected function updateTask (dt :Number) :int {
         // Are we already running a task?
         var status :int;
         if (_curChild != null) {
             status = _curChild.task.update(dt);
-            
+
             // The task completed
             if (status != RUNNING) {
                 _curChild = null;
             }
-            
+
             // Exit immediately, unless our task failed, in which case we'll try to select
             // another one below
             if (status != FAIL) {
                 return status;
             }
         }
-        
+
         var numTriedTasks :int = 0;
         while (numTriedTasks < _children.length) {
             var child :WeightedTask = chooseNextChild();
             numTriedTasks++;
             // skip this task on our next call to chooseNextChild
             child.skip = true;
-            
+
             status = child.task.update(dt);
             if (status == RUNNING) {
                 _curChild = child;
             }
-            
+
             // Exit immediately, unless our task failed, in which case we'll try to select
             // another one
             if (status != FAIL) {
@@ -75,13 +75,13 @@ public class WeightedSelector extends StatefulBehaviorTask
                 return status;
             }
         }
-        
+
         resetSkippedStatus();
-        
+
         // all of our tasks failed
         return FAIL;
     }
-    
+
     protected function chooseNextChild () :WeightedTask {
         var pick :WeightedTask = null;
         var total :Number = 0;
@@ -95,13 +95,13 @@ public class WeightedSelector extends StatefulBehaviorTask
         }
         return pick;
     }
-    
+
     protected function resetSkippedStatus () :void {
         for each (var child :WeightedTask in _children) {
             child.skip = false;
         }
     }
-    
+
     protected var _rands :Randoms;
     protected var _children :Vector.<WeightedTask>;
     protected var _curChild :WeightedTask;

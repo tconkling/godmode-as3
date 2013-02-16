@@ -11,7 +11,7 @@ public class WeightedTask
         this.task = task;
         this.weight = weight;
     }
-    
+
     internal var task :BehaviorTask;
     internal var weight :Number;
     internal var skip :Boolean;

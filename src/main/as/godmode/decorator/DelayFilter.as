@@ -21,25 +21,25 @@ public class DelayFilter extends StatefulBehaviorTask
         _timeKeeper = timeKeeper;
         _lastCompletionTime = -Number.MAX_VALUE;
     }
-    
+
     public function get children () :Vector.<BehaviorTask> {
         return new <BehaviorTask>[ _task ];
     }
-    
+
     override protected function reset () :void {
         if (_taskRunning) {
             _task.deactivate();
             _taskRunning = false;
         }
     }
-    
+
     override protected function updateTask (dt :Number) :int {
         var now :Number = _timeKeeper.timeNow();
         if (!_taskRunning && ((now - _lastCompletionTime) < _minDelay.value)) {
             // can't run.
             return FAIL;
         }
-        
+
         var status :int = _task.update(dt);
         _taskRunning = (status == RUNNING);
         if (status == SUCCESS) {
@@ -47,11 +47,11 @@ public class DelayFilter extends StatefulBehaviorTask
         }
         return status;
     }
-    
+
     protected var _task :BehaviorTask;
     protected var _minDelay :Entry;
     protected var _timeKeeper :TimeKeeper;
-    
+
     protected var _taskRunning :Boolean;
     protected var _lastCompletionTime :Number;
 }

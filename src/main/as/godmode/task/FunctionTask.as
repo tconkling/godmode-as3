@@ -2,6 +2,7 @@
 // godmode
 
 package godmode.task {
+
 import godmode.core.BehaviorTask;
 
 /**
@@ -15,12 +16,12 @@ public class FunctionTask extends BehaviorTask
     public function FunctionTask (f :Function) {
         _f = f;
     }
-    
+
     override protected function updateTask (dt :Number) :int {
         var val :* = (_f.length == 1 ? _f(dt) : _f());
         return (val is int ? val as int : SUCCESS);
     }
-    
+
     protected var _f :Function;
 }
 }

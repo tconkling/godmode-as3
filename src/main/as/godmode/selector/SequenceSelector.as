@@ -17,11 +17,11 @@ public class SequenceSelector extends StatefulBehaviorTask
     public function SequenceSelector (children :Vector.<BehaviorTask>) {
         _children = children;
     }
-    
+
     public function get children () :Vector.<BehaviorTask> {
         return _children;
     }
-    
+
     override protected function reset () :void {
         if (_curChild != null) {
             _curChild.deactivate();
@@ -29,7 +29,7 @@ public class SequenceSelector extends StatefulBehaviorTask
         }
         _childIdx = 0;
     }
-    
+
     override protected function updateTask (dt :Number) :int {
         while (_childIdx < _children.length) {
             _curChild = _children[_childIdx];
@@ -43,11 +43,11 @@ public class SequenceSelector extends StatefulBehaviorTask
                 return childStatus;
             }
         }
-        
+
         // all our children have completed successfully
         return SUCCESS;
     }
-    
+
     protected var _children :Vector.<BehaviorTask>;
     protected var _curChild :BehaviorTask;
     protected var _childIdx :int;

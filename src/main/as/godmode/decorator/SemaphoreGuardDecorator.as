@@ -15,15 +15,15 @@ public class SemaphoreGuardDecorator extends StatefulBehaviorTask
         _task = task;
         _semaphore = semaphore;
     }
-    
+
     public function get children () :Vector.<BehaviorTask> {
         return new <BehaviorTask>[ _task ];
     }
-    
+
     override public function get description () :String {
         return super.description + ":" + _semaphore.name;
     }
-    
+
     override protected function reset () :void {
         if (_semaphoreAcquired) {
             _semaphore.release();
@@ -31,7 +31,7 @@ public class SemaphoreGuardDecorator extends StatefulBehaviorTask
         }
         _task.deactivate();
     }
-    
+
     override protected function updateTask (dt :Number) :int {
         if (!_semaphoreAcquired) {
             _semaphoreAcquired = _semaphore.acquire();
@@ -41,10 +41,10 @@ public class SemaphoreGuardDecorator extends StatefulBehaviorTask
         }
         return _task.update(dt);
     }
-    
+
     protected var _task :BehaviorTask;
     protected var _semaphore :Semaphore;
-    
+
     protected var _semaphoreAcquired :Boolean;
 }
 }

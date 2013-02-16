@@ -16,24 +16,24 @@ public class StatefulBehaviorTask extends BehaviorTask
      */
     protected function reset () :void {
     }
-    
+
     override internal function updateInternal (dt :Number) :int {
         _lastStatus = updateTask(dt);
         _running = (_lastStatus == RUNNING);
         if (!_running) {
             reset();
         }
-        
+
         return _lastStatus;
     }
-    
+
     override internal function deactivateInternal () :void {
         if (_running) {
             _running = false;
             reset();
         }
     }
-    
+
     private var _running :Boolean;
 }
 }
