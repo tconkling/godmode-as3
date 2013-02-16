@@ -4,12 +4,12 @@
 package godmode.task {
 
 import godmode.core.StatefulBehaviorTask;
-import godmode.data.Value;
+import godmode.data.Entry;
 
 /** A Task that completes after a specified amount of time */
 public class TimerAction extends StatefulBehaviorTask
 {
-    public function TimerAction (time :Value) {
+    public function TimerAction (time :Entry) {
         _time = time;
         reset();
     }
@@ -27,7 +27,7 @@ public class TimerAction extends StatefulBehaviorTask
         return (_elapsedTime >= _thisTime ? SUCCESS : RUNNING);
     }
     
-    protected var _time :Value;
+    protected var _time :Entry;
     protected var _thisTime :Number;
     protected var _elapsedTime :Number;
 }

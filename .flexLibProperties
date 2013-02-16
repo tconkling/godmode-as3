@@ -11,8 +11,8 @@
     <classEntry path="godmode.task.TimerAction"/>
     <classEntry path="godmode.decorator.DelayFilter"/>
     <classEntry path="godmode.core.TimeKeeper"/>
-    <classEntry path="godmode.data.Value"/>
-    <classEntry path="godmode.data.MutableValue"/>
+    <classEntry path="godmode.data.Entry"/>
+    <classEntry path="godmode.data.MutableEntry"/>
     <classEntry path="godmode.decorator.LoopingDecorator"/>
     <classEntry path="godmode.decorator.SemaphoreGuardDecorator"/>
     <classEntry path="godmode.pred.Predicate"/>
@@ -27,9 +27,10 @@
     <classEntry path="godmode.selector.WeightedTask"/>
     <classEntry path="godmode.TaskFactory"/>
     <classEntry path="godmode.decorator.PredicateFilter"/>
-    <classEntry path="godmode.pred.ValueExistsPred"/>
-    <classEntry path="godmode.task.RemoveValueAction"/>
+    <classEntry path="godmode.pred.EntryExistsPred"/>
+    <classEntry path="godmode.task.RemoveEntryAction"/>
     <classEntry path="godmode.core.BehaviorTree"/>
+    <classEntry path="godmode.task.StoreEntryAction"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

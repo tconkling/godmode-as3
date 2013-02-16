@@ -7,7 +7,7 @@ import godmode.core.StatefulBehaviorTask;
 import godmode.core.BehaviorTask;
 import godmode.core.BehaviorTaskContainer;
 import godmode.core.TimeKeeper;
-import godmode.data.Value;
+import godmode.data.Entry;
 
 /**
  * A decorator that prevents a task from being run more than once in the given interval.
@@ -15,7 +15,7 @@ import godmode.data.Value;
 public class DelayFilter extends StatefulBehaviorTask
     implements BehaviorTaskContainer
 {
-    public function DelayFilter (minDelay :Value, timeKeeper :TimeKeeper, task :BehaviorTask) {
+    public function DelayFilter (minDelay :Entry, timeKeeper :TimeKeeper, task :BehaviorTask) {
         _task = task;
         _minDelay = minDelay;
         _timeKeeper = timeKeeper;
@@ -49,7 +49,7 @@ public class DelayFilter extends StatefulBehaviorTask
     }
     
     protected var _task :BehaviorTask;
-    protected var _minDelay :Value;
+    protected var _minDelay :Entry;
     protected var _timeKeeper :TimeKeeper;
     
     protected var _taskRunning :Boolean;

@@ -3,7 +3,7 @@
 
 package godmode.data {
 
-public interface MutableValue extends Value
+public interface MutableEntry extends Entry
 {
     function store (value :*) :void;
     function remove () :void;
