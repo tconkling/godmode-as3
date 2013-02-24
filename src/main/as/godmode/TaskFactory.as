@@ -15,6 +15,7 @@ import godmode.decorator.PredicateFilter;
 import godmode.decorator.SemaphoreGuardDecorator;
 import godmode.pred.AndPredicate;
 import godmode.pred.EntryExistsPred;
+import godmode.pred.FunctionPredicate;
 import godmode.pred.NotPredicate;
 import godmode.pred.OrPredicate;
 import godmode.pred.Predicate;
@@ -157,6 +158,11 @@ public class TaskFactory
     /** ORs the given preds together */
     public function or (...preds) :Predicate {
         return new OrPredicate(predVector(preds));
+    }
+
+    /** Returns a Predicate that calls the given function */
+    public function pred (f :Function) :Predicate {
+        return new FunctionPredicate(f);
     }
 
     /** Tests the existence of the given entry in its blackboard */
