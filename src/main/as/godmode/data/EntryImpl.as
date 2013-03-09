@@ -19,18 +19,15 @@ internal class EntryImpl
     }
 
     public function store (val :Object) :void {
-        if (val == null) {
-            throw new Error("Cannot store null in a blackboard");
-        }
-        _value = _bb.toBlackboard(val);
+        _value = (val != null ? _bb.toBlackboard(val) : null);
     }
 
     public function remove () :void {
-        _value = undefined;
+        store(null);
     }
 
     protected var _bb :Blackboard;
-    protected var _value :*;
+    protected var _value :Object;
 }
 
 }

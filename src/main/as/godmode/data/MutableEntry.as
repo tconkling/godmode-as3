@@ -5,10 +5,10 @@ package godmode.data {
 
 public interface MutableEntry extends Entry
 {
-    /** Stores a value for this Entry. Values cannot be null. */
+    /** Stores a value for this Entry. Null values are considered removed. */
     function store (value :Object) :void;
 
-    /** Removes this Entry's value */
+    /** Equivalent to store(null) */
     function remove () :void;
 }
 }
