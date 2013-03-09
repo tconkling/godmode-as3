@@ -8,7 +8,7 @@ import godmode.data.MutableEntry;
 
 public class StoreEntryAction extends BehaviorTask
 {
-    public function StoreEntryAction (value :MutableEntry, storeVal :*) {
+    public function StoreEntryAction (value :MutableEntry, storeVal :Object) {
         _value = value;
         _storeVal = storeVal;
     }
@@ -19,6 +19,6 @@ public class StoreEntryAction extends BehaviorTask
     }
 
     protected var _value :MutableEntry;
-    protected var _storeVal :*;
+    protected var _storeVal :Object;
 }
 }
