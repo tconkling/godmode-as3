@@ -28,7 +28,7 @@ import godmode.task.FunctionTask;
 import godmode.task.NoOpAction;
 import godmode.task.RemoveEntryAction;
 import godmode.task.StoreEntryAction;
-import godmode.task.TimerAction;
+import godmode.task.TimerTask;
 
 public class TaskFactory
 {
@@ -117,7 +117,7 @@ public class TaskFactory
 
     /** Wait a specified amount of time */
     public function wait (time :Entry) :BehaviorTask {
-        return new TimerAction(time);
+        return new TimerTask(time);
     }
 
     /** Calls a function */

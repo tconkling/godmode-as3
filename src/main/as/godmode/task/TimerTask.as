@@ -7,9 +7,9 @@ import godmode.core.StatefulBehaviorTask;
 import godmode.data.Entry;
 
 /** A Task that completes after a specified amount of time */
-public class TimerAction extends StatefulBehaviorTask
+public class TimerTask extends StatefulBehaviorTask
 {
-    public function TimerAction (time :Entry) {
+    public function TimerTask (time :Entry) {
         _time = time;
         reset();
     }

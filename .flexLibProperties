@@ -8,7 +8,7 @@
     <classEntry path="godmode.task.FunctionTask"/>
     <classEntry path="godmode.core.Semaphore"/>
     <classEntry path="godmode.task.NoOpAction"/>
-    <classEntry path="godmode.task.TimerAction"/>
+    <classEntry path="godmode.task.TimerTask"/>
     <classEntry path="godmode.decorator.DelayFilter"/>
     <classEntry path="godmode.core.TimeKeeper"/>
     <classEntry path="godmode.data.Entry"/>
