@@ -166,7 +166,7 @@ public class TaskFactory
 
     /** Does nothing */
     public function noOp () :NoOpTask {
-        return NoOpTask.NO_OP;
+        return NoOpTask.SUCCESS;
     }
 
     /** Returns !pred */
