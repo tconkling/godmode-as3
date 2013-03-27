@@ -7,14 +7,14 @@
     <classEntry path="godmode.core.StatefulBehaviorTask"/>
     <classEntry path="godmode.task.FunctionTask"/>
     <classEntry path="godmode.core.Semaphore"/>
-    <classEntry path="godmode.task.NoOpAction"/>
-    <classEntry path="godmode.task.TimerTask"/>
+    <classEntry path="godmode.task.NoOpTask"/>
+    <classEntry path="godmode.task.DelayTask"/>
     <classEntry path="godmode.decorator.DelayFilter"/>
     <classEntry path="godmode.core.TimeKeeper"/>
     <classEntry path="godmode.data.Entry"/>
     <classEntry path="godmode.data.MutableEntry"/>
     <classEntry path="godmode.decorator.LoopingDecorator"/>
-    <classEntry path="godmode.decorator.SemaphoreGuardDecorator"/>
+    <classEntry path="godmode.decorator.SemaphoreDecorator"/>
     <classEntry path="godmode.pred.Predicate"/>
     <classEntry path="godmode.pred.NotPredicate"/>
     <classEntry path="godmode.pred.AndPredicate"/>
@@ -28,9 +28,9 @@
     <classEntry path="godmode.TaskFactory"/>
     <classEntry path="godmode.decorator.PredicateFilter"/>
     <classEntry path="godmode.pred.EntryExistsPred"/>
-    <classEntry path="godmode.task.RemoveEntryAction"/>
+    <classEntry path="godmode.task.RemoveEntryTask"/>
     <classEntry path="godmode.core.BehaviorTree"/>
-    <classEntry path="godmode.task.StoreEntryAction"/>
+    <classEntry path="godmode.task.StoreEntryTask"/>
     <classEntry path="godmode.data.EntryImpl"/>
   </includeClasses>
   <includeResources/>

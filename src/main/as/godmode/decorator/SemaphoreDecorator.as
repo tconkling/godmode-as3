@@ -8,10 +8,11 @@ import godmode.core.StatefulBehaviorTask;
 import godmode.core.BehaviorTask;
 import godmode.core.BehaviorTaskContainer;
 
-public class SemaphoreGuardDecorator extends StatefulBehaviorTask
+/** Runs its task only when it has acquired the given semaphore */
+public class SemaphoreDecorator extends StatefulBehaviorTask
     implements BehaviorTaskContainer
 {
-    public function SemaphoreGuardDecorator (semaphore :Semaphore, task :BehaviorTask) {
+    public function SemaphoreDecorator (semaphore :Semaphore, task :BehaviorTask) {
         _task = task;
         _semaphore = semaphore;
     }

@@ -12,7 +12,7 @@ import godmode.data.MutableEntry;
 import godmode.decorator.DelayFilter;
 import godmode.decorator.LoopingDecorator;
 import godmode.decorator.PredicateFilter;
-import godmode.decorator.SemaphoreGuardDecorator;
+import godmode.decorator.SemaphoreDecorator;
 import godmode.pred.AndPredicate;
 import godmode.pred.EntryExistsPred;
 import godmode.pred.FunctionPredicate;
@@ -25,10 +25,10 @@ import godmode.selector.SequenceSelector;
 import godmode.selector.WeightedSelector;
 import godmode.selector.WeightedTask;
 import godmode.task.FunctionTask;
-import godmode.task.NoOpAction;
-import godmode.task.RemoveEntryAction;
-import godmode.task.StoreEntryAction;
-import godmode.task.TimerTask;
+import godmode.task.NoOpTask;
+import godmode.task.RemoveEntryTask;
+import godmode.task.StoreEntryTask;
+import godmode.task.DelayTask;
 
 public class TaskFactory
 {
@@ -117,7 +117,7 @@ public class TaskFactory
 
     /** Wait a specified amount of time */
     public function wait (time :Entry) :BehaviorTask {
-        return new TimerTask(time);
+        return new DelayTask(time);
     }
 
     /** Calls a function */
@@ -127,22 +127,22 @@ public class TaskFactory
 
     /** Runs a task if the given semaphore is successfully acquired */
     public function withGuard (semaphore :Semaphore, task :BehaviorTask) :BehaviorTask {
-        return new SemaphoreGuardDecorator(semaphore, task);
+        return new SemaphoreDecorator(semaphore, task);
     }
 
     /** Removes the given value from its blackboard */
     public function removeEntry (entry :MutableEntry) :BehaviorTask {
-        return new RemoveEntryAction(entry);
+        return new RemoveEntryTask(entry);
     }
 
     /** Stores a value in the blackboard */
     public function storeEntry (entry :MutableEntry, storeVal :*) :BehaviorTask {
-        return new StoreEntryAction(entry, storeVal);
+        return new StoreEntryTask(entry, storeVal);
     }
 
     /** Does nothing */
     public function noOp () :BehaviorTask {
-        return new NoOpAction();
+        return NoOpTask.NO_OP;
     }
 
     /** Returns !pred */

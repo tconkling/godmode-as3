@@ -6,9 +6,9 @@ package godmode.task {
 import godmode.core.BehaviorTask;
 import godmode.data.MutableEntry;
 
-public class RemoveEntryAction extends BehaviorTask
+public class RemoveEntryTask extends BehaviorTask
 {
-    public function RemoveEntryAction (entry :MutableEntry) {
+    public function RemoveEntryTask (entry :MutableEntry) {
         _entry = entry;
     }
     

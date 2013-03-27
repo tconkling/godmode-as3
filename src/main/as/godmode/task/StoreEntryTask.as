@@ -6,9 +6,9 @@ package godmode.task {
 import godmode.core.BehaviorTask;
 import godmode.data.MutableEntry;
 
-public class StoreEntryAction extends BehaviorTask
+public class StoreEntryTask extends BehaviorTask
 {
-    public function StoreEntryAction (value :MutableEntry, storeVal :Object) {
+    public function StoreEntryTask (value :MutableEntry, storeVal :Object) {
         _value = value;
         _storeVal = storeVal;
     }
