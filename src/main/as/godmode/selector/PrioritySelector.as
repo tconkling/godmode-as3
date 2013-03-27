@@ -3,9 +3,9 @@
 
 package godmode.selector {
 
-import godmode.core.StatefulBehaviorTask;
 import godmode.core.BehaviorTask;
 import godmode.core.BehaviorTaskContainer;
+import godmode.core.StatefulBehaviorTask;
 
 /**
  * A selector that tries to run each of its children, every update, until it finds one that
@@ -17,8 +17,12 @@ import godmode.core.BehaviorTaskContainer;
 public class PrioritySelector extends StatefulBehaviorTask
     implements BehaviorTaskContainer
 {
-    public function PrioritySelector (children :Vector.<BehaviorTask>) {
-        _children = children;
+    public function PrioritySelector (tasks :Vector.<BehaviorTask> = null) {
+        _children = (tasks || new <BehaviorTask>[]);
+    }
+
+    public function addTask (task :BehaviorTask) :void {
+        _children.push(task);
     }
 
     public function get children () :Vector.<BehaviorTask> {

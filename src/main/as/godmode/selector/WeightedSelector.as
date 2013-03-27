@@ -3,10 +3,10 @@
 
 package godmode.selector {
 
-import godmode.core.RandomStream;
-import godmode.core.StatefulBehaviorTask;
 import godmode.core.BehaviorTask;
 import godmode.core.BehaviorTaskContainer;
+import godmode.core.RandomStream;
+import godmode.core.StatefulBehaviorTask;
 import godmode.util.Randoms;
 
 /**
@@ -18,9 +18,13 @@ import godmode.util.Randoms;
 public class WeightedSelector extends StatefulBehaviorTask
     implements BehaviorTaskContainer
 {
-    public function WeightedSelector (rng :RandomStream, children :Vector.<WeightedTask>) {
+    public function WeightedSelector (rng :RandomStream, tasks :Vector.<WeightedTask> = null) {
         _rands = new Randoms(rng);
-        _children = children;
+        _children = (tasks || new <WeightedTask>[]);
+    }
+
+    public function addTask (task :WeightedTask) :void {
+        _children.push(task);
     }
 
     public function get children () :Vector.<BehaviorTask> {

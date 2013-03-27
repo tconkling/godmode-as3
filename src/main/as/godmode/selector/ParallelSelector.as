@@ -3,9 +3,9 @@
 
 package godmode.selector {
 
-import godmode.core.StatefulBehaviorTask;
 import godmode.core.BehaviorTask;
 import godmode.core.BehaviorTaskContainer;
+import godmode.core.StatefulBehaviorTask;
 
 /**
  * A selector that updates all children, every update, until a condition is met.
@@ -20,9 +20,13 @@ public class ParallelSelector extends StatefulBehaviorTask
     public static const ALL_COMPLETE :int = 4;  // SUCCESS when all succeed or fail.
     public static const ANY_COMPLETE :int = 5;  // SUCCESS when any succeed or fail.
 
-    public function ParallelSelector (type :int, tasks :Vector.<BehaviorTask>) {
+    public function ParallelSelector (type :int, tasks :Vector.<BehaviorTask> = null) {
         _type = type;
-        _children = tasks;
+        _children = (tasks || new <BehaviorTask>[]);
+    }
+
+    public function addTask (task :BehaviorTask) :void {
+        _children.push(task);
     }
 
     public function get children () :Vector.<BehaviorTask> {
@@ -78,6 +82,6 @@ public class ParallelSelector extends StatefulBehaviorTask
     }
 
     protected var _type :int;
-    protected var _children :Vector.<BehaviorTask>
+    protected var _children :Vector.<BehaviorTask>;
 }
 }

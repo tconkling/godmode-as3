@@ -9,8 +9,12 @@ import godmode.core.BehaviorTaskContainer;
 public class OrPredicate extends Predicate
     implements BehaviorTaskContainer
 {
-    public function OrPredicate (preds :Vector.<Predicate>) {
-        _preds = preds;
+    public function OrPredicate (preds :Vector.<Predicate> = null) {
+        _preds = (preds || new <Predicate>[]);
+    }
+
+    public function addPred (pred :Predicate) :void {
+        _preds.push(pred);
     }
 
     public function get children () :Vector.<BehaviorTask> {
