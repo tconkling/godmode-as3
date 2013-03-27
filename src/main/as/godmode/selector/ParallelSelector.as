@@ -25,16 +25,20 @@ public class ParallelSelector extends StatefulBehaviorTask
         _children = (tasks || new <BehaviorTask>[]);
     }
 
-    public function addTask (task :BehaviorTask) :void {
-        _children.push(task);
-    }
-
     public function get children () :Vector.<BehaviorTask> {
         return _children;
     }
 
+    public function get type () :int {
+        return _type;
+    }
+
     override public function get description () :String {
         return super.description + ":" + typeName(_type);
+    }
+
+    public function addTask (task :BehaviorTask) :void {
+        _children.push(task);
     }
 
     override protected function reset () :void {

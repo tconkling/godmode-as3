@@ -13,6 +13,10 @@ public class NotPredicate extends Predicate
         _pred = pred;
     }
 
+    public function get pred () :Predicate {
+        return _pred;
+    }
+
     public function get children () :Vector.<BehaviorTask> {
         return new <BehaviorTask>[ _pred ];
     }

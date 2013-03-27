@@ -49,26 +49,50 @@ public class TaskFactory
     }
 
     /**
-     * Runs the given task if the predicate is true. The predicate is only evaluated
-     * before entering the task.
+     * Runs the given task if the predicate/task is true/returns SUCCESS.
+     * The predicate is only evaluated before entering the task.
      */
-    public function enterIf (pred :Predicate, task :BehaviorTask) :SequenceSelector {
+    public function enterIf (pred :BehaviorTask, task :BehaviorTask) :SequenceSelector {
         return sequence(pred, task);
     }
 
     /** Stops running the task if the predicate is true */
     public function exitIf (pred :Predicate, task :BehaviorTask) :PredicateFilter {
-        return runWhile(new NotPredicate(pred), task);
+        return runWhile(not(pred), task);
     }
 
     /** Runs children in sequence until one fails, or all succeed */
     public function sequence (...children) :SequenceSelector {
-        return new SequenceSelector(taskVector(children));
+        // reuse existing task if possible
+        if (children.length > 0 && children[0] is SequenceSelector) {
+            const seq :SequenceSelector = children[0];
+            for (var ii :int = 1; ii < children.length; ++ii) {
+                seq.addTask(children[ii]);
+            }
+            return seq;
+
+        } else {
+            return new SequenceSelector(taskVector(children));
+        }
     }
 
     /** Runs all children concurrently until one fails */
     public function parallel (...children) :ParallelSelector {
-        return new ParallelSelector(ParallelSelector.ALL_SUCCESS, taskVector(children));
+        const TYPE :int = ParallelSelector.ALL_SUCCESS;
+
+        // reuse existing task if possible
+        if (children.length > 0 && children[0] is ParallelSelector &&
+            ParallelSelector(children[0]).type == TYPE) {
+
+            const parallel :ParallelSelector = children[0];
+            for (var ii :int = 1; ii < children.length; ++ii) {
+                parallel.addTask(children[ii]);
+            }
+            return parallel;
+
+        } else {
+            return new ParallelSelector(TYPE, taskVector(children));
+        }
     }
 
     /** Runs a task a specified number of times */
@@ -126,7 +150,7 @@ public class TaskFactory
     }
 
     /** Runs a task if the given semaphore is successfully acquired */
-    public function withSemaphor (semaphore :Semaphore, task :BehaviorTask) :SemaphoreDecorator {
+    public function withSemaphore (semaphore :Semaphore, task :BehaviorTask) :SemaphoreDecorator {
         return new SemaphoreDecorator(semaphore, task);
     }
 
@@ -146,18 +170,38 @@ public class TaskFactory
     }
 
     /** Returns !pred */
-    public function not (pred :Predicate) :NotPredicate {
-        return new NotPredicate(pred);
+    public function not (pred :Predicate) :Predicate {
+        return (pred is NotPredicate ? NotPredicate(pred).pred : new NotPredicate(pred));
     }
 
     /** ANDs the given preds together */
     public function and (...preds) :AndPredicate {
-        return new AndPredicate(predVector(preds));
+        // re-use existing predicate if possible
+        if (preds.length > 0 && preds[0] is AndPredicate) {
+            const parent :AndPredicate = preds[0];
+            for (var ii :int = 0; ii < preds.length; ++ii) {
+                parent.addPred(preds[ii]);
+            }
+            return parent;
+
+        } else {
+            return new AndPredicate(predVector(preds));
+        }
     }
 
     /** ORs the given preds together */
     public function or (...preds) :OrPredicate {
-        return new OrPredicate(predVector(preds));
+        // re-use existing predicate if possible
+        if (preds.length > 0 && preds[0] is OrPredicate) {
+            const parent :OrPredicate = preds[0];
+            for (var ii :int = 0; ii < preds.length; ++ii) {
+                parent.addPred(preds[ii]);
+            }
+            return parent;
+
+        } else {
+            return new OrPredicate(predVector(preds));
+        }
     }
 
     /** Returns a Predicate that calls the given function */
