@@ -10,6 +10,8 @@ public class BehaviorTree
      * This is slow, and should not be used in production code.
      */
     public var debug :Boolean;
+    /** If both this and debug are true, the tree status will be printed to the console every update. */
+    public var debugPrint :Boolean;
 
     public function BehaviorTree (root :BehaviorTask) {
         _root = root;
@@ -31,6 +33,9 @@ public class BehaviorTree
 
         if (debug) {
             _lastTreeStatus = getStatusString(_root, 0);
+            if (debugPrint) {
+                trace(_lastTreeStatus);
+            }
         }
     }
 
