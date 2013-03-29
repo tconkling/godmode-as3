@@ -14,11 +14,11 @@ import godmode.decorator.LoopingDecorator;
 import godmode.decorator.PredicateFilter;
 import godmode.decorator.SemaphoreDecorator;
 import godmode.pred.AndPredicate;
+import godmode.pred.BehaviorPredicate;
 import godmode.pred.EntryExistsPred;
 import godmode.pred.FunctionPredicate;
 import godmode.pred.NotPredicate;
 import godmode.pred.OrPredicate;
-import godmode.pred.Predicate;
 import godmode.selector.ParallelSelector;
 import godmode.selector.PrioritySelector;
 import godmode.selector.SequenceSelector;
@@ -44,7 +44,7 @@ public class TaskFactory
 //    }
 
     /** Runs the given task while the predicate is true */
-    public function runWhile (pred :Predicate, task :BehaviorTask) :PredicateFilter {
+    public function runWhile (pred :BehaviorPredicate, task :BehaviorTask) :PredicateFilter {
         return new PredicateFilter(pred, task);
     }
 
@@ -57,7 +57,7 @@ public class TaskFactory
     }
 
     /** Stops running the task if the predicate is true */
-    public function exitIf (pred :Predicate, task :BehaviorTask) :PredicateFilter {
+    public function exitIf (pred :BehaviorPredicate, task :BehaviorTask) :PredicateFilter {
         return runWhile(not(pred), task);
     }
 
@@ -170,7 +170,7 @@ public class TaskFactory
     }
 
     /** Returns !pred */
-    public function not (pred :Predicate) :Predicate {
+    public function not (pred :BehaviorPredicate) :BehaviorPredicate {
         return (pred is NotPredicate ? NotPredicate(pred).pred : new NotPredicate(pred));
     }
 
@@ -223,9 +223,9 @@ public class TaskFactory
         return out;
     }
 
-    protected function predVector (arr :Array) :Vector.<Predicate> {
+    protected function predVector (arr :Array) :Vector.<BehaviorPredicate> {
         var n :int = arr.length;
-        var out :Vector.<Predicate> = new Vector.<Predicate>(n, false);
+        var out :Vector.<BehaviorPredicate> = new Vector.<BehaviorPredicate>(n, false);
         for (var ii :int = 0; ii < n; ++ii) {
             out[ii] = arr[ii];
         }

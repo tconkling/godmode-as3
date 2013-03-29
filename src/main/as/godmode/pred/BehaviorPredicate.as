@@ -6,10 +6,10 @@ package godmode.pred {
 import godmode.core.BehaviorTask;
 
 /** A Task that only returns SUCCESS or FAIL */
-public class Predicate extends BehaviorTask
+public class BehaviorPredicate extends BehaviorTask
 {
     /** A Predicate that always evaluates to true */
-    public static function get TRUE () :Predicate {
+    public static function get TRUE () :BehaviorPredicate {
         if (_true == null) {
             _true = new ConstPredicate(true);
         }
@@ -17,7 +17,7 @@ public class Predicate extends BehaviorTask
     }
 
     /** A Predicate that always evaluates to false */
-    public static function get FALSE () :Predicate {
+    public static function get FALSE () :BehaviorPredicate {
         if (_false == null) {
             _false = new ConstPredicate(false);
         }
@@ -33,14 +33,14 @@ public class Predicate extends BehaviorTask
         return (evaluate() ? SUCCESS : FAIL);
     }
 
-    protected static var _true :Predicate;
-    protected static var _false :Predicate;
+    protected static var _true :BehaviorPredicate;
+    protected static var _false :BehaviorPredicate;
 }
 }
 
-import godmode.pred.Predicate;
+import godmode.pred.BehaviorPredicate;
 
-class ConstPredicate extends Predicate {
+class ConstPredicate extends BehaviorPredicate {
     public function ConstPredicate (value :Boolean) {
         _value = value;
     }

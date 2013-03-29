@@ -5,7 +5,7 @@ package godmode.pred {
 
 import godmode.data.Entry;
 
-public class EntryExistsPred extends Predicate
+public class EntryExistsPred extends BehaviorPredicate
 {
     public function EntryExistsPred (entry :Entry) {
         _entry = entry;

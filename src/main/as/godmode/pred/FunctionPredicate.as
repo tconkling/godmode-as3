@@ -3,7 +3,7 @@
 
 package godmode.pred {
 
-public class FunctionPredicate extends Predicate
+public class FunctionPredicate extends BehaviorPredicate
 {
     public function FunctionPredicate (f :Function) {
         _f = f;

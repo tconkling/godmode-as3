@@ -6,14 +6,14 @@ package godmode.pred {
 import godmode.core.BehaviorTask;
 import godmode.core.BehaviorTaskContainer;
 
-public class OrPredicate extends Predicate
+public class OrPredicate extends BehaviorPredicate
     implements BehaviorTaskContainer
 {
-    public function OrPredicate (preds :Vector.<Predicate> = null) {
-        _preds = (preds || new <Predicate>[]);
+    public function OrPredicate (preds :Vector.<BehaviorPredicate> = null) {
+        _preds = (preds || new <BehaviorPredicate>[]);
     }
 
-    public function addPred (pred :Predicate) :void {
+    public function addPred (pred :BehaviorPredicate) :void {
         _preds.push(pred);
     }
 
@@ -22,7 +22,7 @@ public class OrPredicate extends Predicate
     }
 
     override public function evaluate () :Boolean {
-        for each (var pred :Predicate in _preds) {
+        for each (var pred :BehaviorPredicate in _preds) {
             if (pred.evaluate()) {
                 return true;
             }
@@ -30,7 +30,7 @@ public class OrPredicate extends Predicate
         return false;
     }
 
-    protected var _preds :Vector.<Predicate>;
+    protected var _preds :Vector.<BehaviorPredicate>;
 }
 }
 

@@ -15,7 +15,7 @@
     <classEntry path="godmode.data.MutableEntry"/>
     <classEntry path="godmode.decorator.LoopingDecorator"/>
     <classEntry path="godmode.decorator.SemaphoreDecorator"/>
-    <classEntry path="godmode.pred.Predicate"/>
+    <classEntry path="godmode.pred.BehaviorPredicate"/>
     <classEntry path="godmode.pred.NotPredicate"/>
     <classEntry path="godmode.pred.AndPredicate"/>
     <classEntry path="godmode.pred.OrPredicate"/>

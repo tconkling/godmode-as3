@@ -6,13 +6,13 @@ package godmode.decorator {
 import godmode.core.StatefulBehaviorTask;
 import godmode.core.BehaviorTask;
 import godmode.core.BehaviorTaskContainer;
-import godmode.pred.Predicate;
+import godmode.pred.BehaviorPredicate;
 
 /** A filter that runs its task if the given predicate succeeds */
 public class PredicateFilter extends StatefulBehaviorTask
     implements BehaviorTaskContainer
 {
-    public function PredicateFilter (pred :Predicate, task :BehaviorTask) {
+    public function PredicateFilter (pred :BehaviorPredicate, task :BehaviorTask) {
         _pred = pred;
         _task = task;
     }
@@ -33,7 +33,7 @@ public class PredicateFilter extends StatefulBehaviorTask
         return _task.update(dt);
     }
 
-    protected var _pred :Predicate;
+    protected var _pred :BehaviorPredicate;
     protected var _task :BehaviorTask;
 }
 }
