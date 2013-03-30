@@ -16,6 +16,11 @@ import flash.utils.Dictionary;
  */
 public class Blackboard
 {
+    /** Returns a key-less Entry that holds an immutable value */
+    public function staticEntry (value :Object) :Entry {
+        return new StaticEntry(value);
+    }
+
     /** Returns the entry accessor for the given key in the blackboard */
     public function getEntry (key :String) :MutableEntry {
         var entry :EntryImpl = _dict[key];
@@ -44,6 +49,26 @@ public class Blackboard
 
     protected var _dict :Dictionary = new Dictionary();
 }
+}
+
+import godmode.data.Entry;
+
+class StaticEntry
+    implements Entry
+{
+    public function StaticEntry (value :Object) {
+        _value = value;
+    }
+
+    public function get value () :* {
+        return _value;
+    }
+
+    public function get exists () :Boolean {
+        return true;
+    }
+
+    protected var _value :Object;
 }
 
 
