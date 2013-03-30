@@ -3,9 +3,9 @@
 
 package godmode.selector {
 
-import godmode.core.StatefulBehaviorTask;
 import godmode.core.BehaviorTask;
 import godmode.core.BehaviorTaskContainer;
+import godmode.core.StatefulBehaviorTask;
 
 /**
  * Executes child tasks in sequence. Succeeds when all children have succeeded. Fails when
@@ -15,7 +15,7 @@ public class SequenceSelector extends StatefulBehaviorTask
     implements BehaviorTaskContainer
 {
     public function SequenceSelector (tasks :Vector.<BehaviorTask> = null) {
-        _children = (tasks || new <BehaviorTask>[]);
+        _children = (tasks || new Vector.<BehaviorTask>());
     }
 
     public function addTask (task :BehaviorTask) :void {

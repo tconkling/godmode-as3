@@ -18,7 +18,7 @@ public class PrioritySelector extends StatefulBehaviorTask
     implements BehaviorTaskContainer
 {
     public function PrioritySelector (tasks :Vector.<BehaviorTask> = null) {
-        _children = (tasks || new <BehaviorTask>[]);
+        _children = (tasks || new Vector.<BehaviorTask>());
     }
 
     public function addTask (task :BehaviorTask) :void {

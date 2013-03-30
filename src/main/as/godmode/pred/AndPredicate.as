@@ -10,7 +10,7 @@ public class AndPredicate extends BehaviorPredicate
     implements BehaviorTaskContainer
 {
     public function AndPredicate (preds :Vector.<BehaviorPredicate> = null) {
-        _preds = (preds || new <BehaviorPredicate>[]);
+        _preds = (preds || new Vector.<BehaviorPredicate>());
     }
 
     public function addPred (pred :BehaviorPredicate) :void {

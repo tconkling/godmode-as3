@@ -20,7 +20,7 @@ public class WeightedSelector extends StatefulBehaviorTask
 {
     public function WeightedSelector (rng :RandomStream, tasks :Vector.<WeightedTask> = null) {
         _rands = new Randoms(rng);
-        _children = (tasks || new <WeightedTask>[]);
+        _children = (tasks || new Vector.<WeightedTask>());
     }
 
     public function addTask (task :WeightedTask) :void {

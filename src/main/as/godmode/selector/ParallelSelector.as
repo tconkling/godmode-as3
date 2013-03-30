@@ -22,7 +22,7 @@ public class ParallelSelector extends StatefulBehaviorTask
 
     public function ParallelSelector (type :int, tasks :Vector.<BehaviorTask> = null) {
         _type = type;
-        _children = (tasks || new <BehaviorTask>[]);
+        _children = (tasks || new Vector.<BehaviorTask>());
     }
 
     public function get children () :Vector.<BehaviorTask> {
