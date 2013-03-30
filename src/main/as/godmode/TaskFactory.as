@@ -96,22 +96,22 @@ public class TaskFactory
     }
 
     /** Runs a task a specified number of times */
-    public function forCount (count :int, task :BehaviorTask) :BehaviorTask {
+    public function loop (count :int, task :BehaviorTask) :BehaviorTask {
         return new LoopingDecorator(LoopingDecorator.BREAK_NEVER, count, task);
     }
 
     /** Loops a task forever */
-    public function forever (task :BehaviorTask) :LoopingDecorator {
+    public function loopForever (task :BehaviorTask) :LoopingDecorator {
         return new LoopingDecorator(LoopingDecorator.BREAK_NEVER, 0, task);
     }
 
     /** Runs a task until it succeeds */
-    public function untilSuccess (task :BehaviorTask) :LoopingDecorator {
+    public function loopUntilSuccess (task :BehaviorTask) :LoopingDecorator {
         return new LoopingDecorator(LoopingDecorator.BREAK_ON_SUCCESS, 0, task);
     }
 
     /** Loops a task until it fails */
-    public function untilFail (task :BehaviorTask) :LoopingDecorator {
+    public function loopUntilFail (task :BehaviorTask) :LoopingDecorator {
         return new LoopingDecorator(LoopingDecorator.BREAK_ON_FAIL, 0, task);
     }
 
