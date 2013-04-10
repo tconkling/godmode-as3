@@ -115,6 +115,11 @@ public class TaskFactory
         return new LoopingDecorator(LoopingDecorator.BREAK_ON_FAIL, 0, task);
     }
 
+    /** Loops a task until it succeeds or fails */
+    public function loopUntilComplete (task :BehaviorTask) :LoopingDecorator {
+        return new LoopingDecorator(LoopingDecorator.BREAK_ON_COMPLETE, 0, task);
+    }
+
     /** Runs a task, and ensure that it won't be re-run until a minimum amount of time has elapsed */
     public function withRepeatDelay (minDelay :Entry, task :BehaviorTask) :DelayFilter {
         return new DelayFilter(minDelay, _timeKeeper, task);
