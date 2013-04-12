@@ -17,7 +17,7 @@ import flash.utils.Dictionary;
 public class Blackboard
 {
     /** Returns a key-less Entry that holds an immutable value */
-    public function staticEntry (value :Object) :Entry {
+    public static function staticEntry (value :Object) :Entry {
         return new StaticEntry(value);
     }
 
