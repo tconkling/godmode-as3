@@ -32,6 +32,8 @@
     <classEntry path="godmode.core.BehaviorTree"/>
     <classEntry path="godmode.task.StoreEntryTask"/>
     <classEntry path="godmode.data.EntryImpl"/>
+    <classEntry path="godmode.decorator.ScopeDecorator"/>
+    <classEntry path="godmode.core.ScopedResource"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

@@ -4,6 +4,7 @@
 package godmode {
 
 import godmode.core.BehaviorTask;
+import godmode.core.ScopedResource;
 import godmode.core.RandomStream;
 import godmode.core.Semaphore;
 import godmode.core.TimeKeeper;
@@ -13,6 +14,7 @@ import godmode.decorator.DelayFilter;
 import godmode.decorator.LoopingDecorator;
 import godmode.decorator.PredicateFilter;
 import godmode.decorator.SemaphoreDecorator;
+import godmode.decorator.ScopeDecorator;
 import godmode.pred.AndPredicate;
 import godmode.pred.BehaviorPredicate;
 import godmode.pred.EntryExistsPred;
@@ -59,6 +61,24 @@ public class TaskFactory
     /** Stops running the task if the predicate is true */
     public function exitIf (pred :BehaviorPredicate, task :BehaviorTask) :PredicateFilter {
         return runWhile(not(pred), task);
+    }
+
+    /**
+     * Runs the given task, using the given ScopedResource. The resource will be acquired
+     * before the task is run, and released when the task is complete (or gets interrupted).
+     *
+     * (This is similar to a 'using' statement (or try/finally) in a structured language.)
+     */
+    public function using (resource :ScopedResource, task :BehaviorTask) :ScopeDecorator {
+        // combine multiple using(resource1, using(resource2, ... statements into one
+        if (task is ScopeDecorator) {
+            const using :ScopeDecorator = ScopeDecorator(task);
+            using.addResource(resource);
+            return using;
+
+        } else {
+            return new ScopeDecorator(task, new <ScopedResource>[ resource ]);
+        }
     }
 
     /** Runs children in sequence until one fails, or all succeed */
