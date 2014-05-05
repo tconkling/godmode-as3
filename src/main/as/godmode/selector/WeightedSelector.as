@@ -28,9 +28,10 @@ public class WeightedSelector extends StatefulBehaviorTask
     }
 
     public function get children () :Vector.<BehaviorTask> {
-        var out :Vector.<BehaviorTask> = new Vector.<BehaviorTask>(_children.length, true);
-        for each (var child :WeightedTask in _children) {
-            out.push(child.task);
+        const n :uint = _children.length;
+        var out :Vector.<BehaviorTask> = new Vector.<BehaviorTask>(n, true);
+        for (var ii :int = 0; ii < n; ++ii) {
+            out[ii] = _children[ii].task;
         }
         return out;
     }
